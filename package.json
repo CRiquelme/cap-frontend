@@ -24,7 +24,7 @@
     "overrides": {
       "axios": "$axios",
       "react": "$react",
-      "react-dom": "$react-dom",
+      "react-dom": "$react-dom"
     },
     "devDependencies": {
         "eslint": "8.23.1",
