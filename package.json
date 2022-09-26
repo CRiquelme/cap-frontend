@@ -21,6 +21,9 @@
         "react-openapi-client": "^0.2.2",
         "sass": "^1.55.0"
     },
+    "overrides": {
+      "axios": "$axios"
+    },
     "devDependencies": {
         "eslint": "8.23.1",
         "eslint-config-next": "^12.3.1"
