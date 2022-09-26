@@ -15,9 +15,9 @@ const nextConfig = {
       {
         source: '/api-docs/:path*',
         destination: `http://localhost:3000/api-docs/:path*`,
-      }
-    ]
-  }
-}
+      },
+    ];
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
