@@ -1,29 +1,35 @@
 {
-    "name": "cap-frontend",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "dev": "next dev -p 3001",
-        "build": "next build",
-        "start": "next start",
-        "lint": "next lint",
-        "lint:fix": "next lint --fix"
-    },
-    "dependencies": {
-        "eslint-config-prettier": "^8.5.0",
-        "eslint-plugin-jsx-a11y": "^6.6.1",
-        "eslint-plugin-prettier": "^4.2.1",
-        "next": "12.3.1",
-        "prettier": "^2.7.1",
-        "react": "18.2.0",
-        "react-dom": "18.2.0",
-        "axios": "^0.27.2",
-        "react-openapi-client": "^0.2.2",
-        "sass": "^1.55.0"
-    },
-    "devDependencies": {
-        "eslint": "8.23.1",
-        "eslint-config-next": "^12.3.1"
-    }
+  "name": "cap-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start",
+    "style:all": "yarn style:lint && yarn style:prettier",
+    "style:lint": "eslint '**/*.{js,jsx,ts,tsx}'",
+    "style:prettier": "prettier --check '**/*.{js,jsx,ts,tsx}'",
+    "make-pretty": "prettier --write '**/*.{js,jsx,ts,tsx}'"
+  },
+  "dependencies": {
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "next": "12.3.1",
+    "prettier": "^2.7.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "axios": "^0.27.2",
+    "react-openapi-client": "^0.2.2",
+    "sass": "^1.55.0"
+  },
+  "overrides": {
+    "axios": "$axios",
+    "react": "$react",
+    "react-dom": "$react-dom"
+  },
+  "devDependencies": {
+    "eslint": "8.23.1",
+    "eslint-config-next": "^12.3.1"
+  }
 }
-
