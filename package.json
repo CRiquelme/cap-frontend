@@ -24,7 +24,9 @@
     "sass": "^1.55.0"
   },
   "overrides": {
-    "axios": "$axios"
+    "axios": "$axios",
+    "react": "$react",
+    "react-dom": "$react-dom"
   },
   "devDependencies": {
     "eslint": "8.23.1",
