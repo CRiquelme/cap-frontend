@@ -7,7 +7,7 @@ export default function useLearningUnits(id) {
 
   return {
     learningUnits: data,
-    isLoading: !error && !data,
-    isError: error,
+    isLoadingUnit: !error && !data,
+    isErrorUnit: error,
   };
 }
