@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import LearningUnitList from 'components/LearningUnitList';
 // import { LearningUnitService } from '../../service/LearningUnitService';
 import { useRouter } from 'next/router';
