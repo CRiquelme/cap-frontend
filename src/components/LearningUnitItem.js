@@ -1,10 +1,11 @@
 import { Checkbox } from 'primereact/checkbox';
 
-function LearningUnitItem(props) {
+function LearningUnitItem({ unit }) {
+  console.log(unit);
   return (
     <div>
-      <h1>{props.id}</h1>
-      <h1>{props.name}</h1>
+      <h1>{unit.id}</h1>
+      <h1>{unit.name}</h1>
       <Checkbox checked="true"></Checkbox>
     </div>
   );

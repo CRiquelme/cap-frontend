@@ -9,10 +9,7 @@ function CurriculumPage() {
   const router = useRouter();
   const curriculumId = router.query.id;
   const curriculumTitle = 'Full Stack Developer';
-
   const learningUnitId = router ? curriculumId : null;
-
-  console.count();
 
   const { learningUnits, isLoading, isError } = useLearningUnits(learningUnitId);
 
@@ -28,7 +25,7 @@ function CurriculumPage() {
       <h1>
         <div>
           <h2>{curriculumTitle}</h2>
-          <p>{learningUnits.map((unit) => JSON.stringify(unit.id))}</p>
+          <LearningUnitList learningUnits={learningUnits} />
         </div>
       </h1>
     </div>
