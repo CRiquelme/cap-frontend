@@ -1,4 +1,4 @@
-import LearningUnitList from 'components/LearningUnitList';
+import LearningUnitsDataView from '../../components/LearningUnitsDataView';
 import { useRouter } from 'next/router';
 
 import useLearningUnits from 'hooks/useLearningUnits';
@@ -24,7 +24,7 @@ function CurriculumPage() {
       <h1>
         <div>
           <h2>{curriculum ? curriculum.name : null}</h2>
-          <LearningUnitList learningUnits={learningUnits} />
+          <LearningUnitsDataView learningUnits={learningUnits} />
         </div>
       </h1>
     </div>
