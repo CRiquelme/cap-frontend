@@ -1,4 +1,4 @@
-import LearningUnitItem from './LearningUnitItem';
+import LearningUnitItem from 'components/LearningUnitItem';
 
 const LearningUnitList = ({ learningUnits }) => {
   return (

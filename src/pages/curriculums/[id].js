@@ -1,8 +1,7 @@
 import LearningUnitList from 'components/LearningUnitList';
-// import { LearningUnitService } from '../../service/LearningUnitService';
 import { useRouter } from 'next/router';
 
-import useLearningUnits from '../../hooks/useLearningUnits';
+import useLearningUnits from 'hooks/useLearningUnits';
 
 function CurriculumPage() {
   const router = useRouter();
