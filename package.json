@@ -6,7 +6,7 @@
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "yarn style:lint && yarn style:prettier",
+    "lint": "yarn make-pretty && yarn style:lint && yarn style:prettier",
     "style:lint": "eslint '**/*.{js,jsx,ts,tsx}'",
     "style:prettier": "prettier --check '**/*.{js,jsx,ts,tsx}'",
     "make-pretty": "prettier --write '**/*.{js,jsx,ts,tsx}'"
