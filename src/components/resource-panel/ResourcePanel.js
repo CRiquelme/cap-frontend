@@ -1,7 +1,7 @@
 import { Panel } from 'primereact/panel';
 
 
-const ResourceCard = ({ resource }) => {
+const ResourcePanel = ({ resource }) => {
 
   const template = (options) => {
     const className = `${options.className} justify-content-start`;
@@ -23,4 +23,4 @@ const ResourceCard = ({ resource }) => {
     </Panel>
   )
 };
-export default ResourceCard;
+export default ResourcePanel;

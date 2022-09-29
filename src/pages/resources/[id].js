@@ -1,4 +1,4 @@
-import ResourceCard from 'components/resource-card/ResourceCard';
+import ResourcePanel from 'components/resource-panel/ResourcePanel';
 import { useRouter } from 'next/router';
 
 
@@ -18,7 +18,7 @@ function ResourcePage() {
   }
 
   return (
-    <ResourceCard resource={resource}></ResourceCard>
+    <ResourcePanel resource={resource}></ResourcePanel>
   );
 }
 
