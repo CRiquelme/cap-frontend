@@ -21,14 +21,10 @@ function CurriculumPage() {
   }
 
   return (
-    <div>
-      <h1>
-        <div className={styles.container}>
-          <Panel header={curriculum ? curriculum.name : null}>
-            <LearningUnitsList learningUnits={learningUnits} />
-          </Panel>
-        </div>
-      </h1>
+    <div className={styles.container}>
+      <Panel header={curriculum ? curriculum.name : null}>
+        <LearningUnitsList learningUnits={learningUnits} />
+      </Panel>
     </div>
   );
 }
