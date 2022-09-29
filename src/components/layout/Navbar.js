@@ -25,6 +25,11 @@ function Navbar() {
       icon: 'pi pi-home',
       url: '/',
     },
+    {
+      label: 'User: ' + data.name,
+      icon: 'pi pi-user',
+      disabled: true,
+    },
   ];
 
   function setHeader() {
