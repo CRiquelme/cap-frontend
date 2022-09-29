@@ -1,29 +1,32 @@
-import LearningUnitList from 'components/LearningUnitList';
+import useLearningUnits from '@hooks/useLearningUnits';
+import useCurriculums from '@hooks/useCurriculums';
+import LearningUnitsList from '@components/learning-units-list/LearningUnitsList';
 import { useRouter } from 'next/router';
-
-import useLearningUnits from 'hooks/useLearningUnits';
+import { Panel } from 'primereact/panel';
+import styles from '@styles/Home.module.scss';
 
 function CurriculumPage() {
   const router = useRouter();
-  const curriculumId = router.query.id;
-  const curriculumTitle = 'Full Stack Developer';
-  const learningUnitId = router ? curriculumId : null;
+  let curriculumId = router.query.id;
+  curriculumId = router ? curriculumId : null;
 
-  const { learningUnits, isLoading, isError } = useLearningUnits(learningUnitId);
+  const { learningUnits, isLoadingUnit, isErrorUnit } = useLearningUnits(curriculumId);
+  const { curriculum, isLoadingCurriculum, isErrorCurriculum } = useCurriculums(curriculumId);
 
-  if (isLoading) {
+  if (isLoadingUnit || isLoadingCurriculum) {
     return 'loading';
   }
-  if (isError) {
+  if (isErrorUnit || isErrorCurriculum) {
     return 'error';
   }
 
   return (
     <div>
       <h1>
-        <div>
-          <h2>{curriculumTitle}</h2>
-          <LearningUnitList learningUnits={learningUnits} />
+        <div className={styles.container}>
+          <Panel header={curriculum ? curriculum.name : null}>
+            <LearningUnitsList learningUnits={learningUnits} />
+          </Panel>
         </div>
       </h1>
     </div>
