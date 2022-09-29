@@ -1,8 +1,9 @@
-import LearningUnitsDataView from '../../components/LearningUnitsDataView';
+import useLearningUnits from '@hooks/useLearningUnits';
+import useCurriculums from '@hooks/useCurriculums';
+import LearningUnitsList from '@components/LearningUnits/LearningUnitsList';
 import { useRouter } from 'next/router';
-
-import useLearningUnits from 'hooks/useLearningUnits';
-import useCurriculums from 'hooks/useCurriculums';
+import { Panel } from 'primereact/panel';
+import styles from '@styles/Home.module.scss';
 
 function CurriculumPage() {
   const router = useRouter();
@@ -22,9 +23,10 @@ function CurriculumPage() {
   return (
     <div>
       <h1>
-        <div>
-          <h2>{curriculum ? curriculum.name : null}</h2>
-          <LearningUnitsDataView learningUnits={learningUnits} />
+        <div className={styles.container}>
+          <Panel header={curriculum ? curriculum.name : null}>
+            <LearningUnitsList learningUnits={learningUnits} />
+          </Panel>
         </div>
       </h1>
     </div>
