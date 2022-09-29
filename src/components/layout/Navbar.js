@@ -2,6 +2,7 @@ import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
 import React, { useState, useEffect } from 'react';
 import useUsers from 'hooks/useUsers';
+import styles from '@styles/layout.module.scss';
 
 function Navbar() {
   const { data, isLoading, isError } = useUsers();
@@ -15,7 +16,7 @@ function Navbar() {
     return 'loading';
   }
   if (isError) {
-    return 'error';
+    return 'Usuario no autenticado';
   }
 
   let items = [
@@ -35,7 +36,7 @@ function Navbar() {
   }
 
   return (
-    <div>
+    <div className={styles.nav}>
       <Menubar model={items} end={setHeader} />
     </div>
   );

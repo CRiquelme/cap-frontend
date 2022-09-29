@@ -7,9 +7,7 @@ import styles from '@styles/Home.module.scss';
 function MyApp({ Component, pageProps }) {
   return (
     <div className={styles.container}>
-      <div className={styles.nav}>
-        <Navbar />
-      </div>
+      <Navbar />
       <Component className={styles.container} {...pageProps} />
     </div>
   );
