@@ -3,7 +3,6 @@ import useCurriculums from '@hooks/useCurriculums';
 import LearningUnitsList from '@components/learning-units-list/LearningUnitsList';
 import { useRouter } from 'next/router';
 import { Panel } from 'primereact/panel';
-import styles from '@styles/Home.module.scss';
 
 function CurriculumPage() {
   const router = useRouter();
@@ -21,7 +20,7 @@ function CurriculumPage() {
   }
 
   return (
-    <div className={styles.container}>
+    <div>
       <Panel header={curriculum ? curriculum.name : null}>
         <LearningUnitsList learningUnits={learningUnits} />
       </Panel>
