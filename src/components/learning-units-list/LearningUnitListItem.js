@@ -1,5 +1,5 @@
 import useCompletedLearningUnit from '@hooks/useCompletedLearningUnit';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from 'primereact/button';
 import { ToggleButton } from 'primereact/togglebutton';
@@ -8,11 +8,13 @@ import styles from '@styles/LearningUnitsList.module.scss';
 import profilePic from '@utils/images/unit.jpeg';
 
 function LearningUnitItem({ unit }) {
-  const { completed, isLoading, isError } = useCompletedLearningUnit(unit.id);
+  const { data, isLoading, isError } = useCompletedLearningUnit(unit.id);
 
-  const [isCompleted, setCompleted] = useState(completed ? completed.completed : false);
+  const [isCompleted, setCompleted] = useState(false);
 
-  console.log(completed);
+  useEffect(() => {
+    data ? setCompleted(data.completed) : false;
+  }, [data]);
 
   if (isLoading) {
     return 'loading';
