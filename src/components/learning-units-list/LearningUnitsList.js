@@ -1,11 +1,11 @@
-import LearningUnitItem from '@components/LearningUnits/LearningUnitListItem';
+import LearningUnitListItem from '@components/learning-units-list/LearningUnitListItem';
 import { DataView } from 'primereact/dataview';
 
-import styles from '@styles/DataViewDemo.module.scss';
+import styles from '@styles/LearningUnitsList.module.scss';
 
 const LearningUnitsList = ({ learningUnits }) => {
   const renderListItem = (unit) => {
-    return <LearningUnitItem unit={unit} />;
+    return <LearningUnitListItem unit={unit} />;
   };
 
   const itemTemplate = (unit, layout) => {

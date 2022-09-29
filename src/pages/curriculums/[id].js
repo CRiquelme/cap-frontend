@@ -1,6 +1,6 @@
 import useLearningUnits from '@hooks/useLearningUnits';
 import useCurriculums from '@hooks/useCurriculums';
-import LearningUnitsList from '@components/LearningUnits/LearningUnitsList';
+import LearningUnitsList from '@components/learning-units-list/LearningUnitsList';
 import { useRouter } from 'next/router';
 import { Panel } from 'primereact/panel';
 import styles from '@styles/Home.module.scss';
