@@ -6,7 +6,7 @@ export default function useCompletedLearningUnit(id) {
   const { data, error } = useSWR(`http://localhost:3001/api/learning_units/${id}/completed`, fetcher);
 
   return {
-    completed: data,
+    data: data,
     isLoading: !error && !data,
     isError: error,
   };
