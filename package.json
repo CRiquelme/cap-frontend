@@ -24,6 +24,7 @@
     "primereact": "^8.6.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-openapi-client": "^0.2.2",
     "sass": "^1.55.0",
     "swr": "^1.3.0",
     "yup": "^0.32.11"

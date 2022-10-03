@@ -1,9 +1,9 @@
 import useSWR from 'swr';
 
-export default function useUsers() {
+export default function useUsersOut() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const { data, error } = useSWR(`http://localhost:3001/api/current_user`, fetcher);
+  const { data, error } = useSWR(`http://localhost:3001/api/sign_out`, fetcher);
 
   return {
     data: data,

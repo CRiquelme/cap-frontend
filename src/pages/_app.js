@@ -9,8 +9,10 @@ import '@styles/globals.scss';
 function MyApp({ Component, pageProps }) {
   return (
     <div className={styles.container}>
-      <Navbar />
-      <Component className={styles.container} {...pageProps} />
+      <OpenAPIProvider definition="http://localhost:3001/api-docs/swagger.json">
+        <Navbar />
+        <Component className={styles.container} {...pageProps} />
+      </OpenAPIProvider>
     </div>
   );
 }
