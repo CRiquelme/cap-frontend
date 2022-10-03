@@ -8,13 +8,17 @@ import styles from '@styles/LearningUnitsList.module.scss';
 import profilePic from '@utils/images/unit.jpeg';
 
 function LearningUnitItem({ unit }) {
-  const { data, isLoading, isError } = useCompletedLearningUnit(unit.id);
-
   const [isCompleted, setCompleted] = useState(false);
+
+  const { data, isLoading, isError } = useCompletedLearningUnit(unit.id);
 
   useEffect(() => {
     data ? setCompleted(data.completed) : false;
   }, [data]);
+
+  const handleOnChange = (e) => {
+    setCompleted(e.value);
+  };
 
   if (isLoading) {
     return 'loading';
@@ -33,7 +37,7 @@ function LearningUnitItem({ unit }) {
             <Button icon="pi pi-external-link" label="Go to Learning Unit" disabled={false}></Button>
           </div>
           <div className={styles.checkbox}>
-            <ToggleButton onLabel="Completado" offLabel="No Completado" onIcon="pi pi-check" offIcon="pi pi-times" checked={isCompleted} onChange={(e) => setCompleted(e.value)} />
+            <ToggleButton onLabel="Completado" offLabel="No Completado" onIcon="pi pi-check" offIcon="pi pi-times" checked={isCompleted} onChange={handleOnChange} />
           </div>
         </div>
       </div>
