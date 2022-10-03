@@ -1,6 +1,7 @@
 import useCompletedLearningUnit from '@hooks/useCompletedLearningUnit';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from 'primereact/button';
 import { ToggleButton } from 'primereact/togglebutton';
 import { Card } from 'primereact/card';
@@ -50,7 +51,9 @@ function LearningUnitItem({ unit }) {
         <div className={styles.productListDetail}>
           <div className={styles.productName}>{unit.name}</div>
           <div>
-            <Button icon="pi pi-external-link" label="Go to Learning Unit" disabled={false}></Button>
+            <Link href={`/learning_units/${unit.id}`}>
+              <Button icon="pi pi-external-link" label="Go to Learning Unit" disabled={false}></Button>
+            </Link>
           </div>
           <div className={styles.checkbox}>
             <ToggleButton onLabel="Completado" offLabel="No Completado" onIcon="pi pi-check" offIcon="pi pi-times" checked={isCompleted} onChange={handleOnChange} />
