@@ -1,18 +1,18 @@
-import React from 'react'
+import React from 'react';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import useResourceAverage from '@hooks/useResourceAverage';
 import styles from '@styles/ResourcesList.module.scss';
 import Link from 'next/link';
 
-const ResourcesListItem = ({resourceUnits}) => {
+const ResourcesListItem = ({ resourceUnits }) => {
   const { resourceAverage } = useResourceAverage(resourceUnits.id);
 
   return (
-    <div className='col-12 md:col-3'>
+    <div className="col-12 md:col-3">
       <div className={`${styles.resourceGridItem}`}>
         <div className={`${styles.resourceListItem}`}>
-          <img src={`images/product/${resourceUnits.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={resourceUnits.name} />
+          <img src={`images/product/${resourceUnits.image}`} onError={(e) => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')} alt={resourceUnits.name} />
           <div className="product-list-detail">
             <div className={styles.resourceName}>{resourceUnits.name}</div>
             <div className={styles.resourceValidation}>
@@ -21,7 +21,7 @@ const ResourcesListItem = ({resourceUnits}) => {
                   <span>{resourceAverage?.average_evaluation}</span>
                   <Rating value={resourceAverage?.average_evaluation} readOnly cancel={false} />
                 </>
-                ) : (
+              ) : (
                 <span>Sin evaluación</span>
               )}
             </div>
@@ -37,8 +37,7 @@ const ResourcesListItem = ({resourceUnits}) => {
         </div>
       </div>
     </div>
+  );
+};
 
-  )
-}
-
-export default ResourcesListItem
+export default ResourcesListItem;

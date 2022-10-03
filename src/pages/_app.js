@@ -4,7 +4,7 @@ import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css'; //icons
 import Navbar from '@components/layout/Navbar';
 import styles from '@styles/Home.module.scss';
-import '@styles/globals.scss'
+import '@styles/globals.scss';
 
 function MyApp({ Component, pageProps }) {
   return (
