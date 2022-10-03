@@ -1,0 +1,66 @@
+.colFW {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: stretch;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.resourceGridItem {
+  margin: 0.5em;
+  border: 1px solid var(--surface-border);
+  padding: 2rem;
+  transition: all 0.5s ease-out;
+  &:hover {
+    border: 1px solid #3d3fb5;
+    background-color: rgba(61, 63, 181, 0.05);
+  }
+}
+
+.resourceListItem {
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.resourceName {
+  color: #3d3fb5;
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.resourceUrl {
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-align: center;
+  transition: all 0.1s ease-out;
+  i {
+    color: #3d3fb5;
+    font-weight: 600;
+  }
+  &:hover {
+    font-weight: 600;
+  }
+}
+
+.resourceLink {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.resourceValidation {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0.8rem 0;
+  gap: 1rem;
+  text-align: center;
+}

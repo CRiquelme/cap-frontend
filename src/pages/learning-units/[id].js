@@ -1,12 +1,25 @@
 import React from 'react'
-import ResourcesList from '@components/resourcesList/ResourcesList'
+import ResourcesList from '@components/resources-list/ResourcesList'
+import { Panel } from 'primereact/panel';
+import { useRouter } from 'next/router';
+import useResources from '@hooks/useResources';
+import '@styles/ResourcesList.module.scss';
 
-const curriculumId = () => {
+const resources = () => {
+  const router = useRouter();
+  let learningUnitIdQuery = router.query.id;
+  let learningUnitId = router ? learningUnitIdQuery : null;
+
+  const { resources, isLoadingResources, isErrorResources } = useResources(learningUnitId);
+
+  if (isLoadingResources)  return 'loading';
+  if (isErrorResources) return 'error';
+
   return (
-    <>
-      <ResourcesList />
-    </>
+    <Panel header={resources ? resources.name : null}>
+      <ResourcesList resources={resources} learningUnitId={learningUnitId} />
+    </Panel>
   )
 }
 
-export default curriculumId
+export default resources;
