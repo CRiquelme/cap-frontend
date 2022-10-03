@@ -51,7 +51,7 @@ function LearningUnitItem({ unit }) {
         <div className={styles.productListDetail}>
           <div className={styles.productName}>{unit.name}</div>
           <div>
-            <Link href={`/learning_units/${unit.id}`}>
+            <Link href={`/learning-units/${unit.id}`}>
               <Button icon="pi pi-external-link" label="Go to Learning Unit" disabled={false}></Button>
             </Link>
           </div>
