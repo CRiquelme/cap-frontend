@@ -16,8 +16,24 @@ function LearningUnitItem({ unit }) {
     data ? setCompleted(data.completed) : false;
   }, [data]);
 
-  const handleOnChange = (e) => {
-    setCompleted(e.value);
+  const handleOnChange = (clicked) => {
+    if (clicked.value) {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      };
+      fetch(`http://localhost:3001/api/learning_units/${unit.id}/completed`, requestOptions)
+        .then((response) => response.json())
+        .then(() => setCompleted(clicked.value));
+    } else if (!clicked.value) {
+      const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      };
+      fetch(`http://localhost:3001/api/learning_units/${unit.id}/completed`, requestOptions)
+        .then((response) => response.json())
+        .then(() => setCompleted(clicked.value));
+    }
   };
 
   if (isLoading) {
