@@ -6,7 +6,7 @@ export default function useResource(id) {
   const { data, error } = useSWR(`http://localhost:3001/api/resources/${id}`, fetcher);
 
   return {
-    resource: data,
+    data: data,
     isLoading: !error && !data,
     isError: error,
   };
