@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { InputText } from 'primereact/inputtext';
+import { Formik } from 'formik';
 import styles from '@styles/Modal.module.scss';
 
 const AddResource = () => {
