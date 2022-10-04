@@ -6,7 +6,8 @@ import useResourceAverageEvaluation from 'hooks/useResourceAverageEvaluation';
 
 const ResourcePage = () => {
   const router = useRouter();
-  const resourceId = router.query.id;
+  let resourceId = router.query.id;
+  resourceId = router ? resourceId : null;
 
   const { data: resource, isLoading: isLoadingResource, isError: isErrorResource } = useResource(resourceId);
   const { data, isLoading: isLoadingEvaluation } = useResourceEvaluation(resourceId);
