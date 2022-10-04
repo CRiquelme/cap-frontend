@@ -1,23 +1,13 @@
-import useUsers from '@hooks/useUsers';
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
 import styles from '@styles/layout.module.scss';
-import { useRouter } from 'next/router';
+
+import useCurrentUser from '@hooks/useCurrentUser';
+import useSignOut from '@hooks/useSignOut';
 
 function Navbar() {
-  const [isLogged, setLogged] = useState(false);
-  const { data, loading } = useUsers();
-  const router = useRouter();
-
-  useEffect(() => {
-    data ? setLogged(data.name) : false;
-  }, [data]);
-
-  if (loading) {
-    return 'loading';
-  }
+  const currentUser = useCurrentUser();
+  const signOut = useSignOut();
 
   function items() {
     let response = [
@@ -27,14 +17,14 @@ function Navbar() {
         url: '/',
       },
     ];
-    if (data && data.code != 401) {
+    if (currentUser) {
       response.push({
         label: 'Curriculum',
         icon: 'pi pi-book',
         url: '/curriculums/1',
       });
       response.push({
-        label: 'User: ' + data.name,
+        label: 'User: ' + currentUser,
         icon: 'pi pi-user',
         disabled: true,
       });
@@ -42,25 +32,11 @@ function Navbar() {
     return response;
   }
 
-  const handleSignOut = () => {
-    const requestOptions = {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-    };
-    fetch(`http://localhost:3001/users/sign_out`, requestOptions)
-      .then(() => setLogged(false))
-      .then(() => router.push('/'));
-  };
-
   function setHeader() {
-    if (isLogged) {
-      return <Button label="Sign Out" icon="pi pi-power-off" onClick={handleSignOut} />;
+    if (currentUser) {
+      return <Button label="Sign Out" icon="pi pi-power-off" onClick={signOut} />;
     } else {
-      return (
-        <Link href="/users/sign_in">
-          <Button label="Sign In" icon="pi pi-power-on" />
-        </Link>
-      );
+      return <Button label="Sign In" icon="pi pi-power-on" />;
     }
   }
 
