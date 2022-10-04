@@ -13,13 +13,9 @@ const ResourcePage = () => {
   const { data, isLoading: isLoadingEvaluation } = useResourceEvaluation(resourceId);
   const { data: average_evaluation, isLoading: isLoadingAverage, isError: isErrorAverage, mutate } = useResourceAverageEvaluation(resourceId);
 
-  if (isLoadingResource || isLoadingEvaluation || isLoadingAverage) {
-    return 'loading';
-  }
+  if (isLoadingResource || isLoadingEvaluation || isLoadingAverage) return 'loading';
 
-  if (isErrorResource || isErrorAverage) {
-    return 'error';
-  }
+  if (isErrorResource || isErrorAverage) return 'error';
 
   let current_evaluation = undefined;
   data && (current_evaluation = data.evaluation);
