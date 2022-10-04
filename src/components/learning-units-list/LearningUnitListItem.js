@@ -45,7 +45,7 @@ function LearningUnitItem({ unit }) {
   }
 
   return (
-    <Card>
+    <Card className={styles.cardFull}>
       <div className={styles.productListItem}>
         <Image className={styles.img} src={profilePic} alt={unit.name} />
         <div className={styles.productListDetail}>
