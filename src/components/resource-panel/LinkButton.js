@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const LinkButton = ({ url }) => {
   if (!url) return <></>;
-  
+
   return (
     <p>
       <Link href={url}>
