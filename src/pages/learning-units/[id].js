@@ -1,15 +1,14 @@
 import React from 'react';
 import ResourcesList from '@components/resources-list/ResourcesList';
-// import useResources from '@hooks/useResources';
-import { Panel } from 'primereact/panel';
+import { useRouter } from 'next/router';
 import '@styles/ResourcesList.module.scss';
 
-const resources = () => {
-  return (
-    <Panel>
-      <ResourcesList resources={resources} />
-    </Panel>
-  );
+const Resources = () => {
+  const router = useRouter();
+  let learningUnitIdQuery = router.query.id;
+  let learningUnitId = router ? learningUnitIdQuery : null;
+
+  return <ResourcesList learningUnitId={learningUnitId} />;
 };
 
-export default resources;
+export default Resources;

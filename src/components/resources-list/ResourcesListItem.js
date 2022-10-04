@@ -37,7 +37,7 @@ const ResourcesListItem = ({ resourceUnits }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default ResourcesListItem;
