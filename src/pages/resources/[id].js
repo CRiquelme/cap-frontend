@@ -21,10 +21,7 @@ const ResourcePage = () => {
   }
 
   let current_evaluation = undefined;
-
-  if (!isErrorEvaluation) {
-    current_evaluation = data.evaluation;
-  }
+  (data && (current_evaluation = data.evaluation))
 
   return <ResourcePanel resource={resource} current_evaluation={current_evaluation} current_average={average_evaluation.average_evaluation} reload_average={mutate}></ResourcePanel>;
 };
