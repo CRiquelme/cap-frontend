@@ -9,7 +9,7 @@ const ResourcePage = () => {
   const resourceId = router.query.id;
 
   const { data: resource, isLoading: isLoadingResource, isError: isErrorResource } = useResource(resourceId);
-  const { data, isLoading: isLoadingEvaluation, isError: isErrorEvaluation } = useResourceEvaluation(resourceId);
+  const { data, isLoading: isLoadingEvaluation } = useResourceEvaluation(resourceId);
   const { data: average_evaluation, isLoading: isLoadingAverage, isError: isErrorAverage, mutate } = useResourceAverageEvaluation(resourceId);
 
   if (isLoadingResource || isLoadingEvaluation || isLoadingAverage) {
@@ -21,7 +21,7 @@ const ResourcePage = () => {
   }
 
   let current_evaluation = undefined;
-  (data && (current_evaluation = data.evaluation))
+  data && (current_evaluation = data.evaluation);
 
   return <ResourcePanel resource={resource} current_evaluation={current_evaluation} current_average={average_evaluation.average_evaluation} reload_average={mutate}></ResourcePanel>;
 };
