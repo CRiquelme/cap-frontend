@@ -14,7 +14,7 @@ const ResourcesList = ({ learningUnitId }) => {
   const [displayBasic, setDisplayBasic] = useState(false);
   const [saveResource, setSaveResource] = useState(false);
 
-  const { data: learningUnit, isLoading: isLoadingUnit, isError: isErrorUnit, mutate: mutateUnit } = useGet(endpoints('learningUnit', learningUnitId));
+  const { data: learningUnit, isLoading: isLoadingUnit, isError: isErrorUnit } = useGet(endpoints('learningUnit', learningUnitId));
   const { data: resources, isLoading: isLoadingResources, isError: isErrorResources, mutate: mutateResources } = useGet(endpoints('learningUnitResources', learningUnitId));
 
   if (isLoadingResources || isLoadingUnit) return 'loading';
