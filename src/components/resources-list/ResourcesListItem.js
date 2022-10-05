@@ -5,7 +5,7 @@ import Link from 'next/link';
 import useGet from '@hooks/useGet';
 import Image from 'next/image';
 import { endpoints } from '@utils/endpoints';
-import profilePic from '@utils/images/unit.jpeg';
+import profilePic from '@utils/images/resource_default.png';
 
 const ResourcesListItem = ({ resource }) => {
   const { resourceAverage } = useGet(endpoints(resourceAverage, resource.id));
