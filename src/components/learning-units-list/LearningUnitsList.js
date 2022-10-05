@@ -8,19 +8,10 @@ const LearningUnitsList = ({ learningUnits }) => {
     return <LearningUnitListItem unit={unit} />;
   };
 
-  const itemTemplate = (unit, layout) => {
-    if (!unit) {
-      return;
-    }
-
-    if (layout === 'list') return renderListItem(unit);
-    // else if (layout === 'grid') return renderGridItem(unit);
-  };
-
   return (
     <div>
       <div className={styles.listLayout}>
-        <DataView value={learningUnits} layout="list" itemTemplate={itemTemplate} paginator rows={9} />
+        <DataView value={learningUnits} layout="list" itemTemplate={renderListItem} paginator rows={9} />
       </div>
     </div>
   );

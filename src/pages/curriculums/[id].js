@@ -1,18 +1,17 @@
-import useLearningUnits from '@hooks/useLearningUnits';
-import useCurriculums from '@hooks/useCurriculums';
+import useGet from '@hooks/useGet';
+import { endpoints } from '@utils/endpoints';
 import LearningUnitsList from '@components/learning-units-list/LearningUnitsList';
 import { useRouter } from 'next/router';
 import { Panel } from 'primereact/panel';
 
 function CurriculumPage() {
   const router = useRouter();
-  let curriculumId = router.query.id;
-  curriculumId = router ? curriculumId : null;
+  const curriculumId = router.query.id;
 
-  const { learningUnits, isLoadingUnit, isErrorUnit } = useLearningUnits(curriculumId);
-  const { curriculum, isLoadingCurriculum, isErrorCurriculum } = useCurriculums(curriculumId);
+  const { data: learningUnits, isLoading: isLoadingCurriculum, isError: isErrorCurriculum } = useGet(endpoints('curriculumLearningUnits', curriculumId));
+  const { data: curriculum, isLoading: isLoadingUnits, isError: isErrorUnit } = useGet(endpoints('curriculum', curriculumId));
 
-  if (isLoadingUnit || isLoadingCurriculum) {
+  if (isLoadingUnits || isLoadingCurriculum) {
     return 'loading';
   }
   if (isErrorUnit || isErrorCurriculum) {
@@ -21,7 +20,7 @@ function CurriculumPage() {
 
   return (
     <div>
-      <Panel header={curriculum ? curriculum.name : null}>
+      <Panel header={curriculum?.name ?? null}>
         <LearningUnitsList learningUnits={learningUnits} />
       </Panel>
     </div>

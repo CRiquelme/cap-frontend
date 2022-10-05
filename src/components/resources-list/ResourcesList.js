@@ -4,20 +4,23 @@ import AddResource from '@components/resources-list/AddResource';
 import { Dialog } from 'primereact/dialog';
 import { DataView } from 'primereact/dataview';
 import { Button } from 'primereact/button';
-import useResources from '@hooks/useResources';
-import useLearningUnit from '@hooks/useLearningUnit';
+
 import styles from '@styles/ResourcesList.module.scss';
 import '@styles/ResourcesList.module.scss';
+import useGet from '@hooks/useGet';
+import { endpoints } from '@utils/endpoints';
 
 const ResourcesList = ({ learningUnitId }) => {
-  const { learningUnit } = useLearningUnit(learningUnitId);
   const [displayBasic, setDisplayBasic] = useState(false);
   const [saveResource, setSaveResource] = useState(false);
-  const { resources, isLoadingResources, isErrorResources } = useResources({ learningUnitId });
-  const dialogFuncMap = { displayBasic: setDisplayBasic };
 
-  if (isLoadingResources) return 'loading';
-  if (isErrorResources) return 'error';
+  const { data: learningUnit, isLoading: isLoadingUnit, isError: isErrorUnit } = useGet(endpoints('learningUnit', learningUnitId));
+  const { data: resources, isLoading: isLoadingResources, isError: isErrorResources } = useGet(endpoints('learningUnitResources', learningUnitId));
+
+  if (isLoadingResources || isLoadingUnit) return 'loading';
+  if (isErrorResources || isErrorUnit) return 'error';
+
+  const dialogFuncMap = { displayBasic: setDisplayBasic };
 
   const onClick = (name) => {
     dialogFuncMap[`${name}`](true);

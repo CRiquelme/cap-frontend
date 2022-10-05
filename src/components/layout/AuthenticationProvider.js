@@ -7,19 +7,21 @@ const AuthenticationProvider = ({ children }) => {
   const router = useRouter();
 
   const isLogged = () => {
-    fetch(`http://localhost:3001/api/current_user`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          setCurrentUser(undefined);
-        }
-      })
-      .then((data) => {
-        if (!currentUser) {
-          setCurrentUser(data ? data : null);
-        }
-      });
+    if (!currentUser) {
+      fetch(`http://localhost:3001/api/current_user`)
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            setCurrentUser(undefined);
+          }
+        })
+        .then((data) => {
+          if (!currentUser) {
+            setCurrentUser(data ? data : null);
+          }
+        });
+    }
   };
 
   isLogged();
