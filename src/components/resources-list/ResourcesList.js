@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ResourcesListItem from '@components/resources-list/ResourcesListItem';
 import AddResource from '@components/resources-list/AddResource';
+import useCurrentUser from '@hooks/useCurrentUser';
 import { Dialog } from 'primereact/dialog';
 import { DataView } from 'primereact/dataview';
 import { Button } from 'primereact/button';
@@ -21,6 +22,7 @@ const ResourcesList = ({ learningUnitId }) => {
   if (isErrorResources || isErrorUnit) return 'error';
 
   const dialogFuncMap = { displayBasic: setDisplayBasic };
+>>>>>>> 1825c11 (WiP)
 
   const onClick = (name) => {
     dialogFuncMap[`${name}`](true);
@@ -52,9 +54,9 @@ const ResourcesList = ({ learningUnitId }) => {
   return (
     <>
       <Dialog header="Nuevo recurso" visible={displayBasic} style={{ width: '50vw' }} onHide={() => onHide('displayBasic')}>
-        <AddResource saveResource={saveResource} onHide={onHide} onSave={onSave} learningUnitId={learningUnitId} />
+        <AddResource saveResource={saveResource} onHide={onHide} onSave={onSave} learningUnitId={learningUnitId} mutate={mutate} />
       </Dialog>
-      <DataView value={resources} layout="grid" header={header} itemTemplate={itemTemplate} paginator rows={9} />
+      <DataView value={resources} layout="grid" header={header} itemTemplate={itemTemplate} paginator rows={16} />
     </>
   );
 };

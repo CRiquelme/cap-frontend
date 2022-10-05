@@ -3,12 +3,14 @@ import { Formik, Field, Form } from 'formik';
 import { Button } from 'primereact/button';
 import * as yup from 'yup';
 import styles from '@styles/Modal.module.scss';
+// import useCurrentUser from '@hooks/useCurrentUser';
 
-const AddResource = ({ onHide, onSave, learningUnitId }) => {
+const AddResource = ({ onHide, onSave, learningUnitId, mutate }) => {
   const SignupSchema = yup.object().shape({
     name: yup.string().required('Requerido').min(2, 'Mínimo 2 caracteres').max(50, 'Máximo 50 caracteres'),
     url: yup.string().required('Requerido').min(2, 'Mínimo 2 caracteres').max(50, 'Máximo 50 caracteres'),
   });
+  // const currentUser = useCurrentUser();
 
   return (
     <>
@@ -16,20 +18,22 @@ const AddResource = ({ onHide, onSave, learningUnitId }) => {
         initialValues={{
           name: '',
           url: '',
+          user_id: ''
         }}
         onSubmit={async (values) => {
-          console.log(values);
-          // hacer el post
+          // console.log(values);
           const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               name: values.name,
               url: values.url,
+              user: 1,
             }),
           };
-          fetch('http://localhost:3001/api/learning_units/' + learningUnitId + '/resources', requestOptions).then((response) => response.json());
-          // Si el post es exitoso
+          const response = await fetch('http://localhost:3001/api/learning_units/' + learningUnitId + '/resources', requestOptions).then((response) => response.json());
+          const data = await response.json();
+          mutate();
           onSave('displayBasic');
         }}
         validationSchema={SignupSchema}
