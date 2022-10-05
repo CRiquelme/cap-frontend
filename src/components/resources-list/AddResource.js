@@ -6,17 +6,34 @@ import styles from '@styles/Modal.module.scss';
 import useCurrentUser from '@hooks/useCurrentUser';
 
 const AddResource = ({ onHide, onSave, learningUnitId, mutate }) => {
+  const currentUser = useCurrentUser();
   const SignupSchema = yup.object().shape({
     name: yup.string().required('Requerido').min(2, 'Mínimo 2 caracteres').max(50, 'Máximo 50 caracteres'),
-    url: yup.string()
-        .required('Requerido')
-        .min(2, 'Mínimo 2 caracteres')
-        .max(50, 'Máximo 50 caracteres')
-        .matches(/^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm,
-          'Por favor, ingresa una url válida'
+    url: yup
+      .string()
+      .required('Requerido')
+      .min(2, 'Mínimo 2 caracteres')
+      .max(50, 'Máximo 50 caracteres')
+      .matches(
+        /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm,
+        'Por favor, ingresa una url válida'
       ),
   });
-  const currentUser = useCurrentUser();
+  const handleSubmit = async (values) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: values.name,
+        url: values.url,
+        user: currentUser.id,
+      }),
+    };
+    const response = await fetch('http://localhost:3001/api/learning_units/' + learningUnitId + '/resources', requestOptions);
+    await response.json();
+    mutate();
+    onSave('displayBasic');
+  };
 
   return (
     <>
@@ -26,21 +43,7 @@ const AddResource = ({ onHide, onSave, learningUnitId, mutate }) => {
           url: '',
           user_id: '',
         }}
-        onSubmit={async (values) => {
-          const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              name: values.name,
-              url: values.url,
-              user: currentUser.id,
-            }),
-          };
-          const response = await fetch('http://localhost:3001/api/learning_units/' + learningUnitId + '/resources', requestOptions);
-          await response.json();
-          mutate();
-          onSave('displayBasic');
-        }}
+        onSubmit={handleSubmit}
         validationSchema={SignupSchema}
       >
         {({ errors, touched }) => (
