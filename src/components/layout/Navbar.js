@@ -1,40 +1,40 @@
 import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
-import React, { useState, useEffect } from 'react';
-import useUsers from 'hooks/useUsers';
 import styles from '@styles/layout.module.scss';
 
+import useCurrentUser from '@hooks/useCurrentUser';
+import useSignOut from '@hooks/useSignOut';
+
 function Navbar() {
-  const { data, isLoading, isError } = useUsers();
-  const [isLogged, setLogged] = useState(false);
+  const currentUser = useCurrentUser();
+  const signOut = useSignOut();
 
-  useEffect(() => {
-    data ? setLogged(!!data) : false;
-  }, [data]);
-
-  if (isLoading) {
-    return 'loading';
+  function items() {
+    let response = [
+      {
+        label: 'Home',
+        icon: 'pi pi-home',
+        url: '/',
+      },
+    ];
+    if (currentUser) {
+      response.push({
+        label: 'Curriculum',
+        icon: 'pi pi-book',
+        url: '/curriculums/1',
+      });
+      response.push({
+        label: 'User: ' + currentUser,
+        icon: 'pi pi-user',
+        disabled: true,
+      });
+    }
+    return response;
   }
-  if (isError) {
-    return 'Usuario no autenticado';
-  }
-
-  let items = [
-    {
-      label: 'Home',
-      icon: 'pi pi-home',
-      url: '/',
-    },
-    {
-      label: 'User: ' + data.name,
-      icon: 'pi pi-user',
-      disabled: true,
-    },
-  ];
 
   function setHeader() {
-    if (isLogged) {
-      return <Button label="Sign Out" icon="pi pi-power-off" />;
+    if (currentUser) {
+      return <Button label="Sign Out" icon="pi pi-power-off" onClick={signOut} />;
     } else {
       return <Button label="Sign In" icon="pi pi-power-on" />;
     }
@@ -42,7 +42,7 @@ function Navbar() {
 
   return (
     <div className={styles.nav}>
-      <Menubar model={items} end={setHeader} />
+      <Menubar model={items()} end={setHeader} />
     </div>
   );
 }

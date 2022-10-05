@@ -13,6 +13,10 @@ const nextConfig = {
         destination: `http://localhost:3000/users/sign_in`,
       },
       {
+        source: '/users/sign_out',
+        destination: `http://localhost:3000/users/sign_out`,
+      },
+      {
         source: '/api-docs/:path*',
         destination: `http://localhost:3000/api-docs/:path*`,
       },
