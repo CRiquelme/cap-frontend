@@ -3,12 +3,11 @@ import ResourcesList from '@components/resources-list/ResourcesList';
 import { useRouter } from 'next/router';
 import '@styles/ResourcesList.module.scss';
 
-const Resources = () => {
+const LearningUnitPage = () => {
   const router = useRouter();
-  let learningUnitIdQuery = router.query.id;
-  let learningUnitId = router ? learningUnitIdQuery : null;
+  let learningUnitId = router.query.id;
 
   return <ResourcesList learningUnitId={learningUnitId} />;
 };
 
-export default Resources;
+export default LearningUnitPage;
