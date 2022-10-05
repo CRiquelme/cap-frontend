@@ -23,17 +23,23 @@ function LearningUnitItem({ unit }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       };
-      fetch(`http://localhost:3001/api/learning_units/${unit.id}/completed`, requestOptions)
-        .then((response) => response.json())
-        .then(() => setCompleted(clicked.value));
+      fetch(`http://localhost:3001/api/learning_units/${unit.id}/completed`, requestOptions).then((response) => {
+        if (response.ok) {
+          setCompleted(clicked.value);
+          return response.json();
+        }
+      });
     } else if (!clicked.value) {
       const requestOptions = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
       };
-      fetch(`http://localhost:3001/api/learning_units/${unit.id}/completed`, requestOptions)
-        .then((response) => response.json())
-        .then(() => setCompleted(clicked.value));
+      fetch(`http://localhost:3001/api/learning_units/${unit.id}/completed`, requestOptions).then((response) => {
+        if (response.ok) {
+          response.json();
+          setCompleted(clicked.value);
+        }
+      });
     }
   };
 
