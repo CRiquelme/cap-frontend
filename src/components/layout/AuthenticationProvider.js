@@ -15,7 +15,11 @@ const AuthenticationProvider = ({ children }) => {
           setCurrentUser(undefined);
         }
       })
-      .then((data) => setCurrentUser(data?.name));
+      .then((data) => {
+        if (!currentUser) {
+          setCurrentUser(data ? data : null);
+        }
+      });
   };
 
   isLogged();

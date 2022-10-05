@@ -32,7 +32,7 @@ function Navbar() {
         },
       });
       response.push({
-        label: 'User: ' + currentUser,
+        label: 'User: ' + currentUser.name,
         icon: 'pi pi-user',
         disabled: true,
       });
