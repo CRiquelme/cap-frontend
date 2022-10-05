@@ -51,7 +51,7 @@ function LearningUnitItem({ unit }) {
         <div className={styles.productListDetail}>
           <div className={styles.productName}>{unit.name}</div>
           <LinkButton url={`/learning-units/${unit.id}`} />
-          <CompleteLearningUnitToggle completed={isCompleted.completed} onChangeHandler={changeHandler} completedLearningUnitEndpoint={completedLearningUnitEndpoint} />
+          <CompleteLearningUnitToggle completed={isCompleted.completed} onChangeHandler={changeHandler} />
         </div>
       </div>
     </Card>
