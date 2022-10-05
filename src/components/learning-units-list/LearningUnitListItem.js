@@ -6,11 +6,12 @@ import { ToggleButton } from 'primereact/togglebutton';
 import { Card } from 'primereact/card';
 import styles from '@styles/LearningUnitsList.module.scss';
 import profilePic from '@utils/images/unit.jpeg';
+import { endpoints } from '@utils/endpoints';
 
 function LearningUnitItem({ unit }) {
-  const endpoint = `http://localhost:3001/api/learning_units/${unit.id}/completed`;
+  const completedLearningUnit = endpoints('isLearningUnitCompleted', unit.id);
 
-  const { data: isCompleted, isLoading, isError, mutate } = useGet(endpoint);
+  const { data: isCompleted, isLoading, isError, mutate } = useGet(completedLearningUnit);
 
   const handleOnChange = (clicked) => {
     if (clicked.value) {
@@ -18,9 +19,9 @@ function LearningUnitItem({ unit }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       };
-      fetch(`http://localhost:3001/api/learning_units/${unit.id}/completed`, requestOptions).then((response) => {
+      fetch(completedLearningUnit, requestOptions).then((response) => {
         if (response.ok) {
-          mutate(endpoint);
+          mutate(completedLearningUnit);
         }
       });
     } else if (!clicked.value) {
@@ -28,9 +29,9 @@ function LearningUnitItem({ unit }) {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
       };
-      fetch(`http://localhost:3001/api/learning_units/${unit.id}/completed`, requestOptions).then((response) => {
+      fetch(completedLearningUnit, requestOptions).then((response) => {
         if (response.ok) {
-          mutate(endpoint);
+          mutate(completedLearningUnit);
         }
       });
     }
