@@ -1,5 +1,4 @@
-import useCompletedLearningUnit from '@hooks/useCompletedLearningUnit';
-import React, { useState, useEffect } from 'react';
+import useGet from '@hooks/useGet';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from 'primereact/button';
@@ -9,13 +8,9 @@ import styles from '@styles/LearningUnitsList.module.scss';
 import profilePic from '@utils/images/unit.jpeg';
 
 function LearningUnitItem({ unit }) {
-  const [isCompleted, setCompleted] = useState(false);
+  const endpoint = `http://localhost:3001/api/learning_units/${unit.id}/completed`;
 
-  const { data, isLoading, isError } = useCompletedLearningUnit(unit.id);
-
-  useEffect(() => {
-    data ? setCompleted(data.completed) : false;
-  }, [data]);
+  const { data: isCompleted, isLoading, isError, mutate } = useGet(endpoint);
 
   const handleOnChange = (clicked) => {
     if (clicked.value) {
@@ -25,8 +20,7 @@ function LearningUnitItem({ unit }) {
       };
       fetch(`http://localhost:3001/api/learning_units/${unit.id}/completed`, requestOptions).then((response) => {
         if (response.ok) {
-          setCompleted(clicked.value);
-          return response.json();
+          mutate(endpoint);
         }
       });
     } else if (!clicked.value) {
@@ -36,8 +30,7 @@ function LearningUnitItem({ unit }) {
       };
       fetch(`http://localhost:3001/api/learning_units/${unit.id}/completed`, requestOptions).then((response) => {
         if (response.ok) {
-          response.json();
-          setCompleted(clicked.value);
+          mutate(endpoint);
         }
       });
     }
@@ -62,7 +55,7 @@ function LearningUnitItem({ unit }) {
             </Link>
           </div>
           <div className={styles.checkbox}>
-            <ToggleButton onLabel="Completado" offLabel="No Completado" onIcon="pi pi-check" offIcon="pi pi-times" checked={isCompleted} onChange={handleOnChange} />
+            <ToggleButton onLabel="Completado" offLabel="No Completado" onIcon="pi pi-check" offIcon="pi pi-times" checked={isCompleted.completed} onChange={handleOnChange} />
           </div>
         </div>
       </div>
