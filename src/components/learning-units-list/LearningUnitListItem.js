@@ -14,27 +14,15 @@ function LearningUnitItem({ unit }) {
   const { data: isCompleted, isLoading, isError, mutate } = useGet(completedLearningUnitEndpoint);
 
   const changeHandler = (clicked) => {
-    if (clicked.value) {
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      };
-      fetch(completedLearningUnitEndpoint, requestOptions).then((response) => {
-        if (response.ok) {
-          mutate(completedLearningUnitEndpoint);
-        }
-      });
-    } else if (!clicked.value) {
-      const requestOptions = {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-      };
-      fetch(completedLearningUnitEndpoint, requestOptions).then((response) => {
-        if (response.ok) {
-          mutate(completedLearningUnitEndpoint);
-        }
-      });
-    }
+    const requestOptions = {
+      method: clicked.value ? 'POST' : 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    fetch(completedLearningUnitEndpoint, requestOptions).then((response) => {
+      if (response.ok) {
+        mutate();
+      }
+    });
   };
 
   if (isLoading) {
