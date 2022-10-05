@@ -14,10 +14,7 @@ const AddResource = ({ onHide, onSave, learningUnitId, mutate }) => {
       .required('Requerido')
       .min(2, 'Mínimo 2 caracteres')
       .max(50, 'Máximo 50 caracteres')
-      .matches(
-        /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm,
-        'Por favor, ingresa una url válida'
-      ),
+      .matches(/^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm, 'Por favor, ingresa una url válida'),
   });
   const handleSubmit = async (values) => {
     const requestOptions = {
