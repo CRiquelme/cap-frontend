@@ -10,7 +10,7 @@ const RatingField = ({ current_evaluation, resource_id, reload_average }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ evaluation: new_evaluation }),
     };
-    const response = await fetch('http://localhost:3001/api/resources/' + resource_id + '/evaluate', requestOptions);
+    const response = await fetch('http://localhost:3001/api/resources/' + resource_id + '/evaluation', requestOptions);
     const data = await response.json();
     setEvaluation(data.evaluation);
     reload_average();
