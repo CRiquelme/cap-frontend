@@ -4,24 +4,32 @@ import styles from '@styles/layout.module.scss';
 
 import useCurrentUser from '@hooks/useCurrentUser';
 import useSignOut from '@hooks/useSignOut';
+import useSignIn from '@hooks/useSignIn';
+import { useRouter } from 'next/router';
 
 function Navbar() {
   const currentUser = useCurrentUser();
   const signOut = useSignOut();
+  const signIn = useSignIn();
+  const router = useRouter();
 
   function items() {
     let response = [
       {
         label: 'Home',
         icon: 'pi pi-home',
-        url: '/',
+        command: () => {
+          router.push('/');
+        },
       },
     ];
     if (currentUser) {
       response.push({
         label: 'Curriculum',
         icon: 'pi pi-book',
-        url: '/curriculums/1',
+        command: () => {
+          router.push('/curriculums/1');
+        },
       });
       response.push({
         label: 'User: ' + currentUser,
@@ -36,7 +44,7 @@ function Navbar() {
     if (currentUser) {
       return <Button label="Sign Out" icon="pi pi-power-off" onClick={signOut} />;
     } else {
-      return <Button label="Sign In" icon="pi pi-power-on" />;
+      return <Button label="Sign In" icon="pi pi-power-on" onClick={signIn} />;
     }
   }
 

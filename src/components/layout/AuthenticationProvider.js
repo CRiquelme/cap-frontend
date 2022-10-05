@@ -13,7 +13,6 @@ const AuthenticationProvider = ({ children }) => {
           return response.json();
         } else {
           setCurrentUser(undefined);
-          router.push('/users/sign_in');
         }
       })
       .then((data) => setCurrentUser(data?.name));
@@ -22,7 +21,7 @@ const AuthenticationProvider = ({ children }) => {
   isLogged();
 
   const signInHandler = () => {
-    setCurrentUser(currentUser);
+    router.push('/users/sign_in');
   };
 
   const signOutHandler = () => {
@@ -33,7 +32,7 @@ const AuthenticationProvider = ({ children }) => {
     fetch(`http://localhost:3001/users/sign_out`, requestOptions).then((response) => {
       if (response.ok) {
         setCurrentUser(undefined);
-        router.push('users/sign_in');
+        router.push('/users/sign_in');
       }
     });
   };
