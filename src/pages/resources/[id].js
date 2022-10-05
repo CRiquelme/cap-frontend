@@ -1,23 +1,26 @@
 import ResourcePanel from 'components/resource-panel/ResourcePanel';
 import { useRouter } from 'next/router';
+import useResourceEvaluation from '@hooks/useResourceEvaluation';
+import useResource from '@hooks/useResource';
+import useResourceAverageEvaluation from 'hooks/useResourceAverageEvaluation';
 
-import useResource from 'hooks/useResource';
-
-function ResourcePage() {
+const ResourcePage = () => {
   const router = useRouter();
-  const resourceId = router.query.id;
+  let resourceId = router.query.id;
+  resourceId = router ? resourceId : null;
 
-  const { resource, isLoading, isError } = useResource(resourceId);
+  const { data: resource, isLoading: isLoadingResource, isError: isErrorResource } = useResource(resourceId);
+  const { data, isLoading: isLoadingEvaluation } = useResourceEvaluation(resourceId);
+  const { data: average_evaluation, isLoading: isLoadingAverage, isError: isErrorAverage, mutate } = useResourceAverageEvaluation(resourceId);
 
-  if (isLoading) {
-    return 'loading';
-  }
+  if (isLoadingResource || isLoadingEvaluation || isLoadingAverage) return 'loading';
 
-  if (isError) {
-    return 'error';
-  }
+  if (isErrorResource || isErrorAverage) return 'error';
 
-  return <ResourcePanel resource={resource}></ResourcePanel>;
-}
+  let current_evaluation = undefined;
+  data && (current_evaluation = data.evaluation);
+
+  return <ResourcePanel resource={resource} current_evaluation={current_evaluation} current_average={average_evaluation.average_evaluation} reload_average={mutate}></ResourcePanel>;
+};
 
 export default ResourcePage;
