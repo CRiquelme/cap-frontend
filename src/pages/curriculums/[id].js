@@ -3,6 +3,7 @@ import { endpoints } from '@utils/endpoints';
 import LearningUnitsList from '@components/learning-units-list/LearningUnitsList';
 import { useRouter } from 'next/router';
 import { Panel } from 'primereact/panel';
+import { Skeleton } from 'primereact/skeleton';
 
 function CurriculumPage() {
   const router = useRouter();
@@ -12,7 +13,7 @@ function CurriculumPage() {
   const { data: curriculum, isLoading: isLoadingUnits, isError: isErrorUnit } = useGet(endpoints('curriculum', curriculumId));
 
   if (isLoadingUnits || isLoadingCurriculum) {
-    return 'loading';
+    return <Skeleton shape="rectangle" width="100%" height="100%" />;
   }
   if (isErrorUnit || isErrorCurriculum) {
     return 'error';
