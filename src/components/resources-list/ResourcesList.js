@@ -15,7 +15,7 @@ const ResourcesList = ({ learningUnitId }) => {
   const [saveResource, setSaveResource] = useState(false);
 
   const { data: learningUnit, isLoading: isLoadingUnit, isError: isErrorUnit } = useGet(endpoints('learningUnit', learningUnitId));
-  const { data: resources, isLoading: isLoadingResources, isError: isErrorResources } = useGet(endpoints('learningUnitResources', learningUnitId));
+  const { data: resources, isLoading: isLoadingResources, isError: isErrorResources, mutate: mutateResources } = useGet(endpoints('learningUnitResources', learningUnitId));
 
   if (isLoadingResources || isLoadingUnit) return 'loading';
   if (isErrorResources || isErrorUnit) return 'error';
@@ -32,7 +32,7 @@ const ResourcesList = ({ learningUnitId }) => {
   };
   const onSave = (name) => {
     dialogFuncMap[`${name}`](false);
-    setSaveResource(true);
+    setSaveResource(false);
   };
 
   const header = (
@@ -52,9 +52,9 @@ const ResourcesList = ({ learningUnitId }) => {
   return (
     <>
       <Dialog header="Nuevo recurso" visible={displayBasic} style={{ width: '50vw' }} onHide={() => onHide('displayBasic')}>
-        <AddResource saveResource={saveResource} onHide={onHide} onSave={onSave} learningUnitId={learningUnitId} />
+        <AddResource saveResource={saveResource} onHide={onHide} onSave={onSave} learningUnitId={learningUnitId} mutate={mutateResources} />
       </Dialog>
-      <DataView value={resources} layout="grid" header={header} itemTemplate={itemTemplate} paginator rows={9} />
+      <DataView value={resources} layout="grid" header={header} itemTemplate={itemTemplate} paginator rows={8} />
     </>
   );
 };
