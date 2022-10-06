@@ -4,13 +4,16 @@ import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css'; //icons
 import Navbar from '@components/layout/Navbar';
 import AuthenticationProvider from '@components/layout/AuthenticationProvider';
+import UnauthGuard from '@components/guards/UnauthGuard';
 
 function MyApp({ Component, pageProps }) {
   return (
     <div>
       <AuthenticationProvider>
         <Navbar />
-        <Component {...pageProps} />
+        <UnauthGuard>
+          <Component {...pageProps} />
+        </UnauthGuard>
       </AuthenticationProvider>
     </div>
   );
