@@ -13,11 +13,8 @@ function UnuthGuard({ children }) {
     if (!currentUser) {
       fetch(`http://localhost:3001/api/current_user`)
         .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            signOut();
-          }
+          if (response.ok) return response.json();
+          signOut();
         })
         .then((data) => signIn(data));
     }

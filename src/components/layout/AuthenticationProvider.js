@@ -6,9 +6,7 @@ const AuthenticationProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(false);
   const router = useRouter();
 
-  const signInHandler = (data) => {
-    setCurrentUser(data);
-  };
+  const signInHandler = (data) => setCurrentUser(data);
 
   const signOutHandler = () => {
     const requestOptions = {
