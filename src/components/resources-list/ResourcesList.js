@@ -4,6 +4,7 @@ import AddResource from '@components/resources-list/AddResource';
 import { Dialog } from 'primereact/dialog';
 import { DataView } from 'primereact/dataview';
 import { Button } from 'primereact/button';
+import { useRouter } from 'next/router';
 
 import styles from '@styles/ResourcesList.module.scss';
 import '@styles/ResourcesList.module.scss';
@@ -13,6 +14,7 @@ import { endpoints } from '@utils/endpoints';
 const ResourcesList = ({ learningUnitId }) => {
   const [displayBasic, setDisplayBasic] = useState(false);
   const [saveResource, setSaveResource] = useState(false);
+  const router = useRouter();
 
   const { data: learningUnit, isLoading: isLoadingUnit, isError: isErrorUnit } = useGet(endpoints('learningUnit', learningUnitId));
   const { data: resources, isLoading: isLoadingResources, isError: isErrorResources, mutate: mutateResources } = useGet(endpoints('learningUnitResources', learningUnitId));
@@ -39,7 +41,7 @@ const ResourcesList = ({ learningUnitId }) => {
     <div className={styles.resourceHeader}>
       {learningUnit?.name}
       <div className={styles.navButtons}>
-        <Button icon="pi pi-arrow-left" onClick={() => onClick('displayBasic')} />
+        <Button label="Volver" icon="pi pi-arrow-left" onClick={() => router.back()} />
         <Button icon="pi pi-plus" onClick={() => onClick('displayBasic')} />
       </div>
     </div>

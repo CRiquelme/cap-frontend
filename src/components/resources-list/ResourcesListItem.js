@@ -5,7 +5,7 @@ import Link from 'next/link';
 import useGet from '@hooks/useGet';
 import Image from 'next/image';
 import { endpoints } from '@utils/endpoints';
-import profilePic from '@utils/images/resource_default.png';
+import profilePic from '@utils/images/resource.jpg';
 
 const ResourcesListItem = ({ resource }) => {
   const { data: resourceAverage } = useGet(endpoints('resourceAverage', resource.id));
@@ -19,9 +19,7 @@ const ResourcesListItem = ({ resource }) => {
           </Link>
           <div className="product-list-detail">
             <div className={styles.resourceName}>
-              <Link href={`/resources/${resource.id}`}>
-                {resource.name}
-              </Link>
+              <Link href={`/resources/${resource.id}`}>{resource.name}</Link>
             </div>
             <div className={styles.resourceValidation}>
               <Average average={resourceAverage?.average_evaluation} />
