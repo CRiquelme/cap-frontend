@@ -1,16 +1,15 @@
 import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
+import Link from 'next/link';
 import styles from '@styles/layout.module.scss';
 
 import useCurrentUser from '@hooks/useCurrentUser';
 import useSignOut from '@hooks/useSignOut';
-import useSignIn from '@hooks/useSignIn';
 import { useRouter } from 'next/router';
 
 function Navbar() {
   const currentUser = useCurrentUser();
   const signOut = useSignOut();
-  const signIn = useSignIn();
   const router = useRouter();
 
   function items() {
@@ -44,7 +43,11 @@ function Navbar() {
     if (currentUser) {
       return <Button label="Sign Out" icon="pi pi-power-off" onClick={signOut} />;
     } else {
-      return <Button label="Sign In" icon="pi pi-power-on" onClick={signIn} />;
+      return (
+        <Link href="/users/sign_in">
+          <Button label="Sign In" icon="pi pi-power-on" />
+        </Link>
+      );
     }
   }
 

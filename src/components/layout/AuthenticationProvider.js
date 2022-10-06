@@ -3,32 +3,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 const AuthenticationProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(undefined);
+  const [currentUser, setCurrentUser] = useState(false);
   const router = useRouter();
 
-  const isLogged = () => {
-    if (!currentUser) {
-      fetch(`http://localhost:3001/api/current_user`)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            setCurrentUser(undefined);
-          }
-        })
-        .then((data) => {
-          if (!currentUser) {
-            setCurrentUser(data ? data : null);
-          }
-        });
-    }
-  };
-
-  isLogged();
-
-  const signInHandler = () => {
-    router.push('/users/sign_in');
-  };
+  const signInHandler = (data) => setCurrentUser(data);
 
   const signOutHandler = () => {
     const requestOptions = {
@@ -38,7 +16,9 @@ const AuthenticationProvider = ({ children }) => {
     fetch(`http://localhost:3001/users/sign_out`, requestOptions).then((response) => {
       if (response.ok) {
         setCurrentUser(undefined);
-        router.push('/users/sign_in');
+        if (router.pathname != '/') {
+          router.push('/users/sign_in');
+        }
       }
     });
   };
