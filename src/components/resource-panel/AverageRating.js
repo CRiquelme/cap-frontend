@@ -1,7 +1,7 @@
 const AverageRating = ({ average }) => {
   return (
     <>
-      <h1>{average}</h1>
+      <h2>{average}</h2>
       <p>Average Rating</p>
     </>
   );

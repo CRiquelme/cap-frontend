@@ -2,7 +2,6 @@ import ResourcePanel from 'components/resource-panel/ResourcePanel';
 import { useRouter } from 'next/router';
 import useGet from '@hooks/useGet';
 import { endpoints } from '@utils/endpoints';
-import AddEvaluation from 'components/resource-panel/AddEvaluation';
 import React from 'react';
 import EvaluationList from '@components/resource-panel/EvaluationList';
 
@@ -39,8 +38,10 @@ const ResourcePage = () => {
 
   return (
     <>
-      <ResourcePanel resource={resource} />
-      <AddEvaluation myEvaluation={myEvaluation} />
+      {/* <div className={styles.wrapEvaluation}> */}
+      <ResourcePanel resource={resource} myEvaluation={myEvaluation} />
+      {/* <AddEvaluation myEvaluation={myEvaluation} /> */}
+      {/* </div> */}
       <EvaluationList evaluationsData={evaluations} />
     </>
   );
