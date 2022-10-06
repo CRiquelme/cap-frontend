@@ -4,6 +4,7 @@ import useGet from '@hooks/useGet';
 import { endpoints } from '@utils/endpoints';
 import AddEvaluation from 'components/resource-panel/AddEvaluation';
 import React from 'react';
+import EvaluationList from '@components/resource-panel/EvaluationList';
 
 const ResourcePage = () => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const ResourcePage = () => {
 
   const { data: evaluations, isLoading: isLoadingEvaluations, isError: isErrorEvaluations, mutate: updateEvaluations } = useGet(endpoints('resourceEvaluations', resourceId));
 
-  if (isLoadingResource || isLoadingAverage  || isLoadingEvaluations) return 'loading';
+  if (isLoadingResource || isLoadingAverage || isLoadingEvaluations) return 'loading';
 
   if (isErrorResource || isErrorAverage || isErrorEvaluations) return 'error';
 
@@ -36,17 +37,13 @@ const ResourcePage = () => {
     hasEvaluated: hasEvaluated,
   };
 
-  const allEvaluations = {
-
-  }
-
   return (
     <>
       <ResourcePanel resource={resource} />
-      <AddEvaluation myEvaluation={myEvaluation}/>
-      <EvaluationList allEvaluations={allEvaluations} />
+      <AddEvaluation myEvaluation={myEvaluation} />
+      <EvaluationList evaluationsData={evaluations} />
     </>
-  )
+  );
 };
 
 export default ResourcePage;
