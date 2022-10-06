@@ -6,17 +6,17 @@ import { Button } from 'primereact/button';
 import { endpoints } from 'utils/endpoints';
 
 const AddEvaluation = ({ myEvaluation }) => {
-  const [evaluation, setEvaluation] = useState(undefined)
-  const [comment, setComment] = useState("")
-  const [evaluated, setEvaluated] = useState(myEvaluation.hasEvaluated)
+  const [evaluation, setEvaluation] = useState(undefined);
+  const [comment, setComment] = useState('');
+  const [evaluated, setEvaluated] = useState(myEvaluation.hasEvaluated);
 
   function handleErase() {
     setEvaluation(undefined);
-    setComment("");
+    setComment('');
   }
 
   async function handleSubmit(comment) {
-    console.log(comment)
+    console.log(comment);
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -32,8 +32,8 @@ const AddEvaluation = ({ myEvaluation }) => {
   if (evaluated) return <></>;
   return (
     <Card title="Agregar comentario">
-      <Rating value={evaluation} onChange={(e) => setEvaluation(e.value)} cancel={false}/>
-      <InputTextarea rows={5} cols={100} value={comment} onChange={(e) => setComment(e.target.value) } autoResize maxlength="800" />
+      <Rating value={evaluation} onChange={(e) => setEvaluation(e.value)} cancel={false} />
+      <InputTextarea rows={5} cols={100} value={comment} onChange={(e) => setComment(e.target.value)} autoResize maxlength="800" />
       <div className="dialog-demo">
         <Button type="button" label="Borrar" icon="pi pi-times" className="p-button-text" onClick={() => handleErase()} />
         <Button type="submit" label="Guardar evaluación" icon="pi pi-check" onClick={() => handleSubmit(comment)} />

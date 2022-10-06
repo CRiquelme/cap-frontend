@@ -18,7 +18,7 @@ const ResourcePage = () => {
 
   const { data: evaluations, isLoading: isLoadingEvaluations, isError: isErrorEvaluations, mutate: updateEvaluations } = useGet(endpoints('resourceEvaluations', resourceId));
 
-  if (isLoadingResource || isLoadingAverage  || isLoadingEvaluations || isLoadingEvaluation) return 'loading';
+  if (isLoadingResource || isLoadingAverage || isLoadingEvaluations || isLoadingEvaluation) return 'loading';
 
   if (isErrorResource || isErrorAverage || isErrorEvaluations || isErrorEvaluation) return 'error';
 
