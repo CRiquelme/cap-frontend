@@ -1,5 +1,5 @@
 import { Button } from 'primereact/button';
-import { Rating } from 'primereact/rating';
+import Average from './Average';
 import styles from '@styles/ResourcesList.module.scss';
 import Link from 'next/link';
 import useGet from '@hooks/useGet';
@@ -8,7 +8,7 @@ import { endpoints } from '@utils/endpoints';
 import profilePic from '@utils/images/resource_default.png';
 
 const ResourcesListItem = ({ resource }) => {
-  const { resourceAverage } = useGet(endpoints(resourceAverage, resource.id));
+  const { data: resourceAverage } = useGet(endpoints("resourceAverage", resource.id));
 
   return (
     <div className="col-12 md:col-3">
@@ -18,14 +18,7 @@ const ResourcesListItem = ({ resource }) => {
           <div className="product-list-detail">
             <div className={styles.resourceName}>{resource.name}</div>
             <div className={styles.resourceValidation}>
-              {resourceAverage?.average_evaluation !== 'Sin evaluación' ? (
-                <>
-                  <span>{resourceAverage?.average_evaluation}</span>
-                  <Rating value={resourceAverage?.average_evaluation} readOnly cancel={false} />
-                </>
-              ) : (
-                <span>Sin evaluación</span>
-              )}
+              <Average average={resourceAverage?.average_evaluation} />
             </div>
             <div className={styles.resourceUrl}>
               <i className="pi pi-link"></i> <Link href={resource.url}>{resource.url}</Link>
