@@ -1,4 +1,4 @@
-import ResourcesListItem from '@components/resources-list/ResourcesListItem';
+import ResourcesListItem from '@components/resources-section/ResourcesListItem';
 import { DataView } from 'primereact/dataview';
 import '@styles/ResourcesList.module.scss';
 
