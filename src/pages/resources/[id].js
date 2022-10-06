@@ -17,7 +17,7 @@ const ResourcePage = () => {
 
   if (isErrorResource || isErrorAverage) return 'error';
 
-  let current_evaluation = data ? data.evaluation) : undefined;
+  let current_evaluation = data ? data.evaluation : undefined;
 
   const resource = {
     name: resourceData.name,
