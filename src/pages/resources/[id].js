@@ -12,15 +12,15 @@ const ResourcePage = () => {
 
   const { data: resourceData, isLoading: isLoadingResource, isError: isErrorResource } = useGet(endpoints('resource', resourceId));
 
-  const { data, isLoading: isLoadingEvaluation } = useGet(endpoints('resourceEvaluation', resourceId));
+  const { data, isLoading: isLoadingEvaluation, isError: isErrorEvaluation } = useGet(endpoints('resourceEvaluation', resourceId));
 
   const { data: average_evaluation, isLoading: isLoadingAverage, isError: isErrorAverage, mutate: updateAverage } = useGet(endpoints('resourceAverage', resourceId));
 
   const { data: evaluations, isLoading: isLoadingEvaluations, isError: isErrorEvaluations, mutate: updateEvaluations } = useGet(endpoints('resourceEvaluations', resourceId));
 
-  if (isLoadingResource || isLoadingAverage || isLoadingEvaluations) return 'loading';
+  if (isLoadingResource || isLoadingAverage  || isLoadingEvaluations || isLoadingEvaluation) return 'loading';
 
-  if (isErrorResource || isErrorAverage || isErrorEvaluations) return 'error';
+  if (isErrorResource || isErrorAverage || isErrorEvaluations || isErrorEvaluation) return 'error';
 
   const hasEvaluated = data.evaluation ? true : false; // revisar
 
