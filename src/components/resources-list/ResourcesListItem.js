@@ -8,7 +8,7 @@ import { endpoints } from '@utils/endpoints';
 import profilePic from '@utils/images/resource_default.png';
 
 const ResourcesListItem = ({ resource }) => {
-  const { data: resourceAverage } = useGet(endpoints("resourceAverage", resource.id));
+  const { data: resourceAverage } = useGet(endpoints('resourceAverage', resource.id));
 
   return (
     <div className="col-12 md:col-3">
