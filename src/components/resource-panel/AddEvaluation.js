@@ -29,6 +29,7 @@ const AddEvaluation = ({ myEvaluation }) => {
   }
 
   if (evaluated) return <></>;
+
   return (
     <Card title="Agregar comentario">
       <Rating value={evaluation} onChange={(e) => setEvaluation(e.value)} cancel={false} />

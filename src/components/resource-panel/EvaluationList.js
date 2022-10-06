@@ -12,7 +12,7 @@ const EvaluationList = ({ evaluationsData }) => {
         <div className={styles.commentCard}>
           <div>
             <Avatar label="U" size="large" />
-            <h5 className="mb-2">{evaluation.user_name +' escribió el '+ evaluation.created_at}</h5>
+            <h5 className="mb-2">{evaluation.user_name + ' escribió el ' + evaluation.created_at}</h5>
           </div>
           <div>
             <Rating value={evaluation.evaluation} stars={5} cancel={false} readOnly="true" />
