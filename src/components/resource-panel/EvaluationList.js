@@ -6,8 +6,6 @@ import { Card } from 'primereact/card';
 import { InputTextarea } from 'primereact/inputtextarea';
 
 const EvaluationList = ({ evaluationsData }) => {
-  console.log(evaluationsData);
-
   const itemTemplate = (evaluation) => {
     return (
       <Card className={styles.cardFull}>
