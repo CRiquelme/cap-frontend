@@ -2,7 +2,6 @@ import React from 'react'
 import { Rating } from 'primereact/rating';
 
 const Average = ({average}) => {
-  console.log(average);
   return (
     <>
       {average !== 'Sin evaluación' ? (
