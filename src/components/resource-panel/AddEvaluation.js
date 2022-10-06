@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputTextarea } from 'primereact';
+import { InputTextarea } from 'primereact/inputtextarea';
 import { Rating } from 'primereact/rating';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
