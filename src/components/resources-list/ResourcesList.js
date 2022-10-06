@@ -38,7 +38,10 @@ const ResourcesList = ({ learningUnitId }) => {
   const header = (
     <div className={styles.resourceHeader}>
       {learningUnit?.name}
-      <Button icon="pi pi-plus" onClick={() => onClick('displayBasic')} />
+      <div className={styles.navButtons}>
+        <Button icon="pi pi-arrow-left" onClick={() => onClick('displayBasic')} />
+        <Button icon="pi pi-plus" onClick={() => onClick('displayBasic')} />
+      </div>
     </div>
   );
 

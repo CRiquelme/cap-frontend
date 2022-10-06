@@ -14,14 +14,20 @@ const ResourcesListItem = ({ resource }) => {
     <div className="col-12 md:col-3">
       <div className={`${styles.resourceGridItem}`}>
         <div className={`${styles.resourceListItem}`}>
-          <Image className={styles.img} src={profilePic} alt={resource.name} />
+          <Link href={`/resources/${resource.id}`}>
+            <Image className={styles.img} src={profilePic} alt={resource.name} />
+          </Link>
           <div className="product-list-detail">
-            <div className={styles.resourceName}>{resource.name}</div>
+            <div className={styles.resourceName}>
+              <Link href={`/resources/${resource.id}`}>
+                {resource.name}
+              </Link>
+            </div>
             <div className={styles.resourceValidation}>
               <Average average={resourceAverage?.average_evaluation} />
             </div>
             <div className={styles.resourceUrl}>
-              <i className="pi pi-link"></i> <Link href={resource.url}>{resource.url}</Link>
+              <i className="pi pi-link"></i> <Link href={resource.url}>Enlace del recurso</Link>
             </div>
             <div className={styles.resourceLink}>
               <Link href={`/resources/${resource.id}`}>
