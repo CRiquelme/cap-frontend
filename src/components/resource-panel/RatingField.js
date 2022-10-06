@@ -1,8 +1,9 @@
 import { Rating } from 'primereact/rating';
 import { useState } from 'react';
+import { endpoints } from 'utils/endpoints';
 
-const RatingField = ({ current_evaluation, resource_id, reload_average }) => {
-  const [evaluation, setEvaluation] = useState(current_evaluation);
+const RatingField = ({ resource }) => {
+  const [evaluation, setEvaluation] = useState(resource.current_evaluation);
 
   async function handleNewEvaluation(new_evaluation) {
     const requestOptions = {
@@ -10,10 +11,10 @@ const RatingField = ({ current_evaluation, resource_id, reload_average }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ evaluation: new_evaluation }),
     };
-    const response = await fetch('http://localhost:3001/api/resources/' + resource_id + '/evaluation', requestOptions);
+    const response = await fetch(endpoints('resourceEvaluation', resource.id), requestOptions);
     const data = await response.json();
     setEvaluation(data.evaluation);
-    reload_average();
+    resource.update_evaluation();
   }
 
   return <Rating value={evaluation} onChange={(e) => handleNewEvaluation(e.value)} cancel={false} />;
