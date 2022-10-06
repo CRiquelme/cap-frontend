@@ -11,12 +11,11 @@ const AddEvaluation = ({ myEvaluation }) => {
   const [evaluated, setEvaluated] = useState(myEvaluation.hasEvaluated);
 
   function handleErase() {
-    setEvaluation(undefined);
+    setEvaluation('');
     setComment('');
   }
 
   async function handleSubmit(comment) {
-    console.log(comment);
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
