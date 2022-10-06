@@ -7,20 +7,28 @@ const ResourcePage = () => {
   const router = useRouter();
   let resourceId = router.query.id;
 
-  const { data: resource, isLoading: isLoadingResource, isError: isErrorResource } = useGet(endpoints('resource', resourceId));
+  const { data: resourceData, isLoading: isLoadingResource, isError: isErrorResource } = useGet(endpoints('resource', resourceId));
 
   const { data, isLoading: isLoadingEvaluation } = useGet(endpoints('resourceEvaluation', resourceId));
 
   const { data: average_evaluation, isLoading: isLoadingAverage, isError: isErrorAverage, mutate } = useGet(endpoints('resourceAverage', resourceId));
 
-  if (isLoadingResource || isLoadingEvaluation || isLoadingAverage) return 'loading';
+  if (isLoadingResource || isLoadingAverage || isLoadingEvaluation) return 'loading';
 
   if (isErrorResource || isErrorAverage) return 'error';
 
-  let current_evaluation = undefined;
-  data && (current_evaluation = data.evaluation);
+  let current_evaluation = data ? data.evaluation : undefined;
 
-  return <ResourcePanel resource={resource} current_evaluation={current_evaluation} current_average={average_evaluation.average_evaluation} reload_average={mutate}></ResourcePanel>;
+  const resource = {
+    name: resourceData.name,
+    url: resourceData.url,
+    id: resourceData.id,
+    current_evaluation: current_evaluation,
+    average_evaluation: average_evaluation.average_evaluation,
+    update_evaluation: mutate,
+  };
+
+  return <ResourcePanel resource={resource} />;
 };
 
 export default ResourcePage;
