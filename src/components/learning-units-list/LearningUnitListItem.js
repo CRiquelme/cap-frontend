@@ -2,7 +2,6 @@ import { Card } from 'primereact/card';
 import Image from 'next/image';
 import styles from '@styles/LearningUnitsList.module.scss';
 import profilePic from '@utils/images/unit.jpeg';
-// import LinkButton from './LinkButton';
 import { CompleteLearningUnitToggle } from './CompleteLearningUnitToogle';
 import { endpoints } from '@utils/endpoints';
 import useGet from '@hooks/useGet';
@@ -47,7 +46,6 @@ function LearningUnitItem({ unit }) {
               <Link href={`/learning-units/${unit.id}`}>{unit.name}</Link>
             </div>
           </div>
-          {/* <LinkButton url={`/learning-units/${unit.id}`} /> */}
           <CompleteLearningUnitToggle completed={isCompleted.completed} onChangeHandler={changeHandler} />
         </div>
       </div>
