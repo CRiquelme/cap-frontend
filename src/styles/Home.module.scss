@@ -108,6 +108,54 @@
   margin-left: 0.5rem;
 }
 
+.imageLeft {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2rem 0;
+  :nth-child(1) {
+    width: 45% !important;
+  }
+  img {
+    width: 306px;
+    height: 306px;
+    object-fit: cover;
+  }
+  div {
+    margin: 5rem 0;
+    width: 40% !important;
+    :nth-child(1) {
+      width: 100% !important;
+    }
+  }
+
+}
+
+.howWorks {
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px #c5c5c5;
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  div {
+    margin: 0 1.5rem;
+  }
+}
+
+.linksFooter {
+  display: flex;
+  margin: 2rem 0 0;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
