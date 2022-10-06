@@ -1,33 +1,26 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import useCurrentUser from '@hooks/useCurrentUser';
 import useGet from '@hooks/useGet';
 import { endpoints } from '@utils/endpoints';
-import ResourcesList from '@components/resources-list/ResourcesList';
 import { Panel } from 'primereact/panel';
 import { Skeleton } from 'primereact/skeleton';
-import styles from '@styles/ResourcesList.module.scss';
 import { Button } from 'primereact/button';
-import AddResource from '@components/resources-list/AddResource';
-import { Dialog } from 'primereact/dialog';
-import '@styles/ResourcesList.module.scss';
+import ResourcesList from '@components/resources-list/ResourcesList';
+import AddNewResourceModal from '@components/resources-list/AddNewResourceModal';
+import styles from '@styles/ResourcesList.module.scss';
 
 const LearningUnitPage = () => {
-  // Inicializo Router
   const router = useRouter();
   let learningUnitId = router.query.id;
+  const currentUser = useCurrentUser();
 
-  // Inicializo states para manejar el Dialog con Hooks
   const [displayBasic, setDisplayBasic] = useState(false);
-  const dialogFuncMap = { displayBasic: setDisplayBasic };
 
-  const [saveResource, setSaveResource] = useState(false);
-
-  // Requests de Data
   const { data: learningUnit, isLoading: isLoadingUnit, isError: isErrorUnit } = useGet(endpoints('learningUnit', learningUnitId));
 
   const { data: resources, isLoading: isLoadingResources, isError: isErrorResources, mutate: mutateResources } = useGet(endpoints('learningUnitResources', learningUnitId));
 
-  // Loading and Data check
   if (isLoadingUnit || isLoadingResources) {
     return <Skeleton shape="rectangle" width="100%" height="100%" />;
   }
@@ -35,20 +28,28 @@ const LearningUnitPage = () => {
     return 'error';
   }
 
-  // handler del botón
-  const onClick = (name) => {
-    dialogFuncMap[`${name}`](true);
-    setSaveResource(false);
+  const showDialogHandler = () => setDisplayBasic(true);
+  const hideDialogHandler = () => setDisplayBasic(false);
+
+  const saveResourceHandler = (values) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: values.name,
+        url: values.url,
+        user: currentUser.id,
+      }),
+    };
+    fetch('http://localhost:3001/api/learning_units/' + learningUnitId + '/resources', requestOptions).then(() => {
+      hideDialogHandler();
+      mutateResources();
+    });
   };
 
-  // handler del Modal
-  const onHide = (name) => {
-    dialogFuncMap[`${name}`](false);
-    setSaveResource(false);
-  };
-  const onSave = (name) => {
-    dialogFuncMap[`${name}`](false);
-    setSaveResource(false);
+  const dialogHandlers = {
+    onHide: hideDialogHandler,
+    onSave: saveResourceHandler,
   };
 
   // TODO: FIX BUTTONS
@@ -58,7 +59,7 @@ const LearningUnitPage = () => {
         {learningUnit?.name}
         <div className={styles.navButtons}>
           <Button label="Volver" icon="pi pi-arrow-left" onClick={() => router.back()} />
-          <Button icon="pi pi-plus" onClick={() => onClick('displayBasic')} />
+          <Button icon="pi pi-plus" onClick={showDialogHandler} />
         </div>
       </div>
     );
@@ -66,10 +67,8 @@ const LearningUnitPage = () => {
 
   return (
     <Panel header={header}>
-      <Dialog header="Nuevo recurso" visible={displayBasic} style={{ width: '50vw' }} onHide={() => onHide('displayBasic')}>
-        <AddResource saveResource={saveResource} onHide={onHide} onSave={onSave} learningUnitId={learningUnitId} mutate={mutateResources} />
-      </Dialog>
-      <ResourcesList resources={resources} learningUnitId={learningUnitId} mutateResources={mutateResources} />
+      {displayBasic && <AddNewResourceModal dialogHandlers={dialogHandlers} />}
+      <ResourcesList resources={resources} learningUnitId={learningUnitId} />
     </Panel>
   );
 };
