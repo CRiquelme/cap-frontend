@@ -4,6 +4,15 @@
   grid-template-columns: 5% 20% 75%;
 }
 
+.resourceHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  width: 96vw;
+}
+
 @media screen and (max-width: 576px) {
   .productItem {
       flex-wrap: wrap;

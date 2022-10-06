@@ -56,7 +56,7 @@ const ResourcesList = ({ learningUnitId }) => {
 
   return (
     <>
-      <Dialog header="Nuevo recurso" visible={displayBasic} style={{ width: '50vw' }} onHide={() => onHide('displayBasic')}>
+      <Dialog header="Nuevo recurso" visible={displayBasic} onHide={() => onHide('displayBasic')}>
         <AddResource saveResource={saveResource} onHide={onHide} onSave={onSave} learningUnitId={learningUnitId} mutate={mutateResources} />
       </Dialog>
       <DataView value={resources} layout="grid" header={header} itemTemplate={itemTemplate} paginator rows={8} />
