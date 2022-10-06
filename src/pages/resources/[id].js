@@ -10,10 +10,10 @@ const ResourcePage = () => {
   const { data: resourceData, isLoading: isLoadingResource, isError: isErrorResource } = useGet(endpoints('resource', resourceId));
 
   const { data, isLoading: isLoadingEvaluation } = useGet(endpoints('resourceEvaluation', resourceId));
-  console.log(endpoints('resourceEvaluation', resourceId))
+  console.log(endpoints('resourceEvaluation', resourceId));
 
   const { data: average_evaluation, isLoading: isLoadingAverage, isError: isErrorAverage, mutate } = useGet(endpoints('resourceAverage', resourceId));
-  console.log(endpoints('resourceAverage', resourceId))
+  console.log(endpoints('resourceAverage', resourceId));
 
   if (isLoadingResource || isLoadingAverage || isLoadingEvaluation) return 'loading';
 
