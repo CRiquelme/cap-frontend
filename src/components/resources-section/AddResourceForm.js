@@ -20,7 +20,7 @@ const AddResourceForm = ({ onHide, onSave }) => {
       <Formik
         initialValues={{
           name: '',
-          url: '',
+          url: 'http://',
           user_id: '',
         }}
         onSubmit={onSave}
