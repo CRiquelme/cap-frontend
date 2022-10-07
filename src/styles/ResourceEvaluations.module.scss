@@ -1,7 +1,17 @@
 .commentCard {
   display: grid;
   align-items: center;
-  grid-template-columns: 5% 20% 75%;
+  grid-template-columns: 25% 75%
+}
+
+.link {
+  text-decoration: none;
+}
+
+.commentUserInfo{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .resourceHeader {
