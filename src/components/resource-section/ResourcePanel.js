@@ -30,10 +30,10 @@ const ResourcePanel = ({ resource, myEvaluation }) => {
   }
 
   const defaultOptions = {
-    evaluation: myEvaluation.evaluation? myEvaluation.evaluation : 1,
+    evaluation: myEvaluation.evaluation ? myEvaluation.evaluation : 1,
     comment: myEvaluation.comment,
-    evaluated: myEvaluation.evaluation? true : false,
-  }
+    evaluated: myEvaluation.evaluation ? true : false,
+  };
 
   return (
     <Panel header={header} className={styles.header}>
