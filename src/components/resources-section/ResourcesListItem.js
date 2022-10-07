@@ -2,14 +2,10 @@ import { Button } from 'primereact/button';
 import Average from './Average';
 import styles from '@styles/ResourcesList.module.scss';
 import Link from 'next/link';
-import useGet from '@hooks/useGet';
 import Image from 'next/image';
-import { endpoints } from '@utils/endpoints';
 import profilePic from '@utils/images/resource.jpg';
 
 const ResourcesListItem = ({ resource }) => {
-  const { data: resourceAverage } = useGet(endpoints('resourceAverage', resource.id));
-
   return (
     <div className="col-12 md:col-3">
       <div className={`${styles.resourceGridItem}`}>
@@ -22,7 +18,7 @@ const ResourcesListItem = ({ resource }) => {
               <Link href={`/resources/${resource.id}`}>{resource.name}</Link>
             </div>
             <div className={styles.resourceValidation}>
-              <Average average={resourceAverage?.average_evaluation} />
+              <Average average={parseFloat(resource.average_evaluation).toFixed(1)} />
             </div>
             <div className={styles.resourceUrl}>
               <i className="pi pi-link"></i> <Link href={resource.url}>Enlace del recurso</Link>
