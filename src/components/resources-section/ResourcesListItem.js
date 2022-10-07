@@ -6,7 +6,6 @@ import Image from 'next/image';
 import profilePic from '@utils/images/resource.jpg';
 
 const ResourcesListItem = ({ resource }) => {
-
   return (
     <div className="col-12 md:col-3">
       <div className={`${styles.resourceGridItem}`}>

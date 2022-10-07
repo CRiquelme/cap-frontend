@@ -7,7 +7,7 @@ const ResourcesList = ({ resources }) => {
 
   return (
     <>
-      <DataView value={resources} layout="grid" itemTemplate={renderGridItem} paginator rows={8} sortOrder={-1} sortField='average_evaluation'/>
+      <DataView value={resources} layout="grid" itemTemplate={renderGridItem} paginator rows={8} sortOrder={-1} sortField="average_evaluation" />
     </>
   );
 };
