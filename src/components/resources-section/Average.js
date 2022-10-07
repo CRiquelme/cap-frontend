@@ -4,7 +4,7 @@ import { Rating } from 'primereact/rating';
 const Average = ({ average }) => {
   return (
     <>
-      {average !== 'Sin evaluación' ? (
+      {average !== 'NaN' ? (
         <>
           <span>{average}</span>
           <Rating value={average} readOnly cancel={false} />
