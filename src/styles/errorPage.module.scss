@@ -1,0 +1,18 @@
+.errorPage {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.wrapInfoError {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wrapButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
