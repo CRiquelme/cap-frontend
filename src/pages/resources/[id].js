@@ -38,10 +38,7 @@ const ResourcePage = () => {
 
   return (
     <>
-      {/* <div className={styles.wrapEvaluation}> */}
       <ResourcePanel resource={resource} myEvaluation={myEvaluation} />
-      {/* <AddEvaluation myEvaluation={myEvaluation} /> */}
-      {/* </div> */}
       <EvaluationList evaluationsData={evaluations} />
     </>
   );
