@@ -7,7 +7,7 @@ import LinkButton from './LinkButton';
 import styles from '@styles/ResourceEvaluations.module.scss';
 import AddEvaluation from '@components/resource-section/AddEvaluation';
 
-const ResourcePanel = ({ resource, myEvaluation }) => {
+const ResourcePanel = ({ resource, formOptions }) => {
   const router = useRouter();
   const header = (
     <div className={styles.resourceHeader}>
@@ -15,14 +15,6 @@ const ResourcePanel = ({ resource, myEvaluation }) => {
       <Button label="Volver" icon="pi pi-arrow-left" onClick={() => router.back()} />
     </div>
   );
-
-  const formOptions = {
-    evaluation: myEvaluation.evaluation ? myEvaluation.evaluation : 1,
-    comment: myEvaluation.comment,
-    evaluated: myEvaluation.evaluation ? true : false,
-    handleSubmitForm: myEvaluation.handleSubmitForm,
-    toast: myEvaluation.toast,
-  };
 
   return (
     <Panel header={header} className={styles.header}>

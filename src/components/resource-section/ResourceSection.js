@@ -40,17 +40,17 @@ const ResourceSection = ({ resourceId }) => {
     average_evaluation: average_evaluation.average_evaluation,
   };
 
-  const myEvaluation = {
-    resourceId: resourceData.id,
-    evaluation: data.evaluation,
+  const formOptions = {
+    evaluation: data.evaluation? data.evaluation : 1,
     comment: data.comment,
+    evaluated: data.evaluation? true : false,
     handleSubmitForm: handleSubmitForm,
     toast: toast,
   };
 
   return (
     <>
-      <ResourcePanel resource={resource} myEvaluation={myEvaluation} />
+      <ResourcePanel resource={resource} formOptions={formOptions} />
       <EvaluationList evaluationsData={evaluations} />
     </>
   );
