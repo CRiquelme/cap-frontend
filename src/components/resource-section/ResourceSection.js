@@ -2,6 +2,7 @@ import ResourcePanel from './ResourcePanel';
 import EvaluationList from './EvaluationList';
 import useGet from '@hooks/useGet';
 import { endpoints } from '@utils/endpoints';
+import { useRef } from 'react';
 
 const ResourceSection = ({ resourceId }) => {
   const { data: resourceData, isLoading: isLoadingResource, isError: isErrorResource } = useGet(endpoints('resource', resourceId));
@@ -12,9 +13,13 @@ const ResourceSection = ({ resourceId }) => {
 
   const { data: evaluations, isLoading: isLoadingEvaluations, isError: isErrorEvaluations, mutate: updateEvaluations } = useGet(endpoints('resourceEvaluations', resourceId));
 
+  const toast = useRef(null);
+
   if (isLoadingResource || isLoadingAverage || isLoadingEvaluations || isLoadingEvaluation) return 'loading';
 
   if (isErrorResource || isErrorAverage || isErrorEvaluations || isErrorEvaluation) return 'error';
+
+  const showSuccess = () => toast.current.show({ severity: 'success', summary: 'Tu evaluación quedó registrada', detail: 'Gracias por contribuir!' });
 
   async function handleSubmitForm(evaluation, comment) {
     const requestOptions = {
@@ -26,6 +31,7 @@ const ResourceSection = ({ resourceId }) => {
     await response.json();
     updateEvaluations();
     updateAverage();
+    showSuccess();
   }
 
   const resource = {
@@ -39,6 +45,7 @@ const ResourceSection = ({ resourceId }) => {
     evaluation: data.evaluation,
     comment: data.comment,
     handleSubmitForm: handleSubmitForm,
+    toast: toast,
   };
 
   return (

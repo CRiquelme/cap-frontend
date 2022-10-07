@@ -21,6 +21,7 @@ const ResourcePanel = ({ resource, myEvaluation }) => {
     comment: myEvaluation.comment,
     evaluated: myEvaluation.evaluation ? true : false,
     handleSubmitForm: myEvaluation.handleSubmitForm,
+    toast: myEvaluation.toast,
   };
 
   return (
