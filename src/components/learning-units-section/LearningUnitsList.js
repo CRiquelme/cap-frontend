@@ -1,4 +1,4 @@
-import LearningUnitListItem from '@components/learning-units-list/LearningUnitListItem';
+import LearningUnitListItem from '@components/learning-units-section/LearningUnitListItem';
 import { DataView } from 'primereact/dataview';
 
 import styles from '@styles/LearningUnitsList.module.scss';
