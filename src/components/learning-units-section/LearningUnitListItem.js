@@ -8,12 +8,13 @@ import useGet from '@hooks/useGet';
 import { Skeleton } from 'primereact/skeleton';
 import Link from 'next/link';
 
-function LearningUnitItem({ unit }) {
+function LearningUnitItem({ unit, showSuccess }) {
   const completedLearningUnitEndpoint = endpoints('isLearningUnitCompleted', unit.id);
 
   const { data: isCompleted, isLoading, isError, mutate } = useGet(completedLearningUnitEndpoint);
 
   const changeHandler = (clicked) => {
+
     const requestOptions = {
       method: clicked.value ? 'POST' : 'DELETE',
       headers: { 'Content-Type': 'application/json' },
@@ -21,9 +22,11 @@ function LearningUnitItem({ unit }) {
     fetch(completedLearningUnitEndpoint, requestOptions).then((response) => {
       if (response.ok) {
         mutate();
+        showSuccess();
       }
     });
   };
+
 
   if (isLoading) {
     return <Skeleton shape="rectangle" width="50%" />;
