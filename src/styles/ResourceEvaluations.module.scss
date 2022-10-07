@@ -4,6 +4,28 @@
   grid-template-columns: 5% 20% 75%;
 }
 
+.resourceHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  width: 96vw;
+}
+
+.wrapEvaluation {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.averageSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+}
+
 @media screen and (max-width: 576px) {
   .productItem {
       flex-wrap: wrap;
@@ -21,6 +43,7 @@
 
   .cardFull{
     width: 100%;
-    height: 100%; ;
+    height: 100%;
+    margin-top: 1rem;
   }
 }

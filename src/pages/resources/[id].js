@@ -2,7 +2,6 @@ import ResourcePanel from 'components/resource-panel/ResourcePanel';
 import { useRouter } from 'next/router';
 import useGet from '@hooks/useGet';
 import { endpoints } from '@utils/endpoints';
-import AddEvaluation from 'components/resource-panel/AddEvaluation';
 import React from 'react';
 import EvaluationList from '@components/resource-panel/EvaluationList';
 
@@ -39,8 +38,7 @@ const ResourcePage = () => {
 
   return (
     <>
-      <ResourcePanel resource={resource} />
-      <AddEvaluation myEvaluation={myEvaluation} />
+      <ResourcePanel resource={resource} myEvaluation={myEvaluation} />
       <EvaluationList evaluationsData={evaluations} />
     </>
   );
