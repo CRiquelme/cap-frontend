@@ -6,6 +6,7 @@ import { Card } from 'primereact/card';
 import LinkButton from './LinkButton';
 import styles from '@styles/ResourceEvaluations.module.scss';
 import AddEvaluation from '@components/resource-section/AddEvaluation';
+import { endpoints } from 'utils/endpoints';
 
 const ResourcePanel = ({ resource, myEvaluation }) => {
   const router = useRouter();
@@ -16,6 +17,24 @@ const ResourcePanel = ({ resource, myEvaluation }) => {
     </div>
   );
 
+  async function handleSubmit(evaluation, comment) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ evaluation: evaluation, comment: comment }),
+    };
+    const response = await fetch(endpoints('resourceEvaluation', myEvaluation.resourceId), requestOptions);
+    await response.json();
+    myEvaluation.updateEvaluations();
+    myEvaluation.updateAverage();
+  }
+
+  const defaultOptions = {
+    evaluation: myEvaluation.evaluation? myEvaluation.evaluation : 1,
+    comment: myEvaluation.comment,
+    evaluated: myEvaluation.evaluation? true : false,
+  }
+
   return (
     <Panel header={header} className={styles.header}>
       <div className={styles.wrapEvaluation}>
@@ -23,7 +42,7 @@ const ResourcePanel = ({ resource, myEvaluation }) => {
           <AverageRating average={resource.average_evaluation} />
           <LinkButton url={resource.url} />
         </Card>
-        <AddEvaluation myEvaluation={myEvaluation} />
+        <AddEvaluation handleSubmit={handleSubmit} defaultOptions={defaultOptions} />
       </div>
     </Panel>
   );
