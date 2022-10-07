@@ -1,8 +1,8 @@
 import { Panel } from 'primereact/panel';
-import AverageRating from './AverageRating';
 import { useRouter } from 'next/router';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
+import { Rating } from 'primereact/rating';
 import LinkButton from './LinkButton';
 import styles from '@styles/ResourceEvaluations.module.scss';
 import AddEvaluation from '@components/resource-section/AddEvaluation';
@@ -38,8 +38,9 @@ const ResourcePanel = ({ resource, myEvaluation }) => {
   return (
     <Panel header={header} className={styles.header}>
       <div className={styles.wrapEvaluation}>
-        <Card title="Agregar evaluación" className={styles.averageSection}>
-          <AverageRating average={resource.average_evaluation} />
+        <Card title="Evaluación promedio" className={styles.averageSection}>
+          <h1>{resource.average_evaluation}</h1>
+          <Rating value={resource.average_evaluation} cancel={false} readOnly={true} />
           <LinkButton url={resource.url} />
         </Card>
         <AddEvaluation handleSubmit={handleSubmit} defaultOptions={defaultOptions} />
