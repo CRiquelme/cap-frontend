@@ -15,11 +15,11 @@ const LearningUnitsSection = ({ curriculumId }) => {
     return 'error';
   }
   return (
-    <div>
+    <>
       <Panel header={curriculum?.name ?? null}>
         <LearningUnitsList learningUnits={learningUnits} />
       </Panel>
-    </div>
+    </>
   );
 };
 

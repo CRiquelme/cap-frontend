@@ -24,12 +24,21 @@ const ResourcesSection = ({ learningUnitId }) => {
     return 'error';
   }
 
-  const showDialogHandler = () => setDisplayBasic(true);
-  const hideDialogHandler = () => setDisplayBasic(false);
+  const saveResourceHandler = (bodyValues) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: bodyValues,
+    };
+    fetch('http://localhost:3001/api/learning_units/' + learningUnitId + '/resources', requestOptions).then(() => {
+      mutateResources();
+      setDisplayBasic(false);
+    });
+  };
 
-  const dialogHandlers = {
-    onHide: hideDialogHandler,
-    mutate: mutateResources,
+  const modalHandlers = {
+    onHide: () => setDisplayBasic(false),
+    onSave: saveResourceHandler,
   };
 
   const header = () => {
@@ -38,7 +47,7 @@ const ResourcesSection = ({ learningUnitId }) => {
         {learningUnit?.name}
         <div className={styles.navButtons}>
           <Button label="Volver" icon="pi pi-arrow-left" onClick={() => router.back()} />
-          <Button icon="pi pi-plus" onClick={showDialogHandler} />
+          <Button icon="pi pi-plus" onClick={() => setDisplayBasic(true)} />
         </div>
       </div>
     );
@@ -46,7 +55,7 @@ const ResourcesSection = ({ learningUnitId }) => {
 
   return (
     <Panel header={header}>
-      {displayBasic && <AddNewResourceModal dialogHandlers={dialogHandlers} learningUnitId={learningUnitId} />}
+      {displayBasic && <AddNewResourceModal handlers={modalHandlers} learningUnitId={learningUnitId} />}
       <ResourcesList resources={resources} learningUnitId={learningUnitId} />
     </Panel>
   );

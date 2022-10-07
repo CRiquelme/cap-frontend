@@ -4,7 +4,7 @@ import { Button } from 'primereact/button';
 import * as yup from 'yup';
 import styles from '@styles/Modal.module.scss';
 
-const AddResourceForm = ({ onHide, onSave }) => {
+const AddResourceForm = ({ onHide, onSubmit }) => {
   const SignupSchema = yup.object().shape({
     name: yup.string().required('Requerido').min(2, 'Mínimo 2 caracteres').max(50, 'Máximo 50 caracteres'),
     url: yup
@@ -23,7 +23,7 @@ const AddResourceForm = ({ onHide, onSave }) => {
           url: 'http://',
           user_id: '',
         }}
-        onSubmit={onSave}
+        onSubmit={onSubmit}
         validationSchema={SignupSchema}
       >
         {({ errors, touched }) => (
