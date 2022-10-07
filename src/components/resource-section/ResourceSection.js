@@ -22,6 +22,9 @@ const ResourceSection = ({ resourceId }) => {
   const showSuccess = () => toast.current.show({ severity: 'success', summary: 'Tu evaluación quedó registrada', detail: 'Gracias por contribuir!' });
 
   async function handleSubmitForm(evaluation, comment) {
+    if (evaluation < 1) {
+      return;
+    }
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -41,7 +44,7 @@ const ResourceSection = ({ resourceId }) => {
   };
 
   const formOptions = {
-    evaluation: data.evaluation ? data.evaluation : 1,
+    evaluation: data.evaluation,
     comment: data.comment,
     evaluated: data.evaluation ? true : false,
     handleSubmitForm: handleSubmitForm,
