@@ -2,27 +2,22 @@ import { Dialog } from 'primereact/dialog';
 import AddResourceForm from '@components/resources-section/AddResourceForm';
 import useCurrentUser from '@hooks/useCurrentUser';
 
-const AddNewResourceModal = ({ dialogHandlers, learningUnitId }) => {
+const AddNewResourceModal = ({ handlers }) => {
   const currentUser = useCurrentUser();
-  const saveResourceHandler = (values) => {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: values.name,
-        url: values.url,
-        user: currentUser.id,
-      }),
-    };
-    fetch('http://localhost:3001/api/learning_units/' + learningUnitId + '/resources', requestOptions).then(() => {
-      dialogHandlers.onHide();
-      dialogHandlers.mutate();
+
+  const save = (values) => {
+    const body = JSON.stringify({
+      name: values.name,
+      url: values.url,
+      user: currentUser.id,
     });
+
+    handlers.onSave(body);
   };
 
   return (
-    <Dialog header="Nuevo recurso" visible={true} style={{ width: '50vw' }} onHide={dialogHandlers.onHide}>
-      <AddResourceForm onHide={dialogHandlers.onHide} onSave={saveResourceHandler} />
+    <Dialog header="Nuevo recurso" visible={true} style={{ width: '50vw' }} onHide={handlers.onHide}>
+      <AddResourceForm onHide={handlers.onHide} onSubmit={save} />
     </Dialog>
   );
 };

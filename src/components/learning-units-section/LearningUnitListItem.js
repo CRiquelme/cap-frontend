@@ -1,7 +1,6 @@
 import { Card } from 'primereact/card';
 import Image from 'next/image';
 import styles from '@styles/LearningUnitsList.module.scss';
-import profilePic from '@utils/images/unit.jpeg';
 import { CompleteLearningUnitToggle } from './CompleteLearningUnitToogle';
 import { endpoints } from '@utils/endpoints';
 import useGet from '@hooks/useGet';
@@ -37,7 +36,16 @@ function LearningUnitItem({ unit, showSuccess }) {
     <Card className={styles.cardFull}>
       <div className={styles.productListItem}>
         <Link href={`/learning-units/${unit.id}`}>
-          <Image className={styles.img} src={profilePic} alt={unit.name} />
+          {/* <Image layout="fill" className={styles.img} src={profilePic} alt=""></Image> */}
+          <Image
+            width="235"
+            height="150"
+            className={styles.img}
+            src={
+              "https://img.freepik.com/vector-gratis/mujeres-felices-aprendiendo-idioma-linea-aislado-ilustracion-vectorial-plana-personajes-femeninos-dibujos-animados-que-toman-lecciones-individuales-traves-messenger-concepto-educacion-tecnologia-digital_74855-10088.jpg?w=2000&t=st=1665151875~exp=1665152475~hmac=e788b587fbbe1bdd29332d55dc1a5965dd181962a0ee5719dc83ef09c895f0b4img.freepik.com/vector-gratis/mujeres-felices-aprendiendo-idioma-linea-aislado-ilustracion-vectorial-plana-personajes-femeninos-dibujos-animados-que-toman-lecciones-individuales-traves-messenger-concepto-educacion-tecnologia-digital_74855-10088.jpg?w=2000&t=st=1665151875~exp=1665152475~hmac=e788b587fbbe1bdd29332d55dc1a5965dd181962a0ee5719dc83ef09c895f0b4'"
+            }
+            alt={unit.name}
+          />
         </Link>
         <div className={styles.productListDetail}>
           <div className={styles.productName}>

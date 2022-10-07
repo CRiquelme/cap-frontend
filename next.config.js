@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['fintualist.com', 'images.unsplash.com'],
+    domains: ['fintualist.com', 'images.unsplash.com', 'img.freepik.com'],
   },
   async rewrites() {
     return [

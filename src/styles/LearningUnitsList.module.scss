@@ -69,7 +69,8 @@
   }
 
   .img {
-    width: 100% !important;
+    max-width: 50px !important;
+    width: 306px;
     margin-right: 2rem;
     border-radius: 10% 50%;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.7);
