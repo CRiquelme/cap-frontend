@@ -11,7 +11,7 @@ const EvaluationList = ({ evaluationsData }) => {
       <Card className={styles.cardFull}>
         <div className={styles.commentCard}>
           <div>
-            <Avatar label="U" size="large" />
+            <Avatar label={evaluation.user_name.charAt(0)} size="large" />
             <h5 className="mb-2">{evaluation.user_name + ' escribió el ' + evaluation.created_at}</h5>
           </div>
           <div>
