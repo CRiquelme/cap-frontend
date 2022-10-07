@@ -16,6 +16,18 @@ const ResourceSection = ({ resourceId }) => {
 
   if (isErrorResource || isErrorAverage || isErrorEvaluations || isErrorEvaluation) return 'error';
 
+  async function handleSubmitForm(evaluation, comment) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ evaluation: evaluation, comment: comment }),
+    };
+    const response = await fetch(endpoints('resourceEvaluation', resourceId), requestOptions);
+    await response.json();
+    updateEvaluations();
+    updateAverage();
+  }
+
   const resource = {
     name: resourceData.name,
     url: resourceData.url,
@@ -24,10 +36,9 @@ const ResourceSection = ({ resourceId }) => {
 
   const myEvaluation = {
     resourceId: resourceData.id,
-    updateAverage: updateAverage,
-    updateEvaluations: updateEvaluations,
     evaluation: data.evaluation,
     comment: data.comment,
+    handleSubmitForm: handleSubmitForm,
   };
 
   return (
