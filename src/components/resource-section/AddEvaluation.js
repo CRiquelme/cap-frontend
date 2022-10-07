@@ -3,41 +3,31 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import { Rating } from 'primereact/rating';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
-import { endpoints } from 'utils/endpoints';
+import { Toast } from 'primereact/toast';
+import styles from '@styles/ResourceEvaluations.module.scss';
 
-const AddEvaluation = ({ myEvaluation }) => {
-  const [evaluation, setEvaluation] = useState(undefined);
-  const [comment, setComment] = useState('');
-  const [evaluated, setEvaluated] = useState(myEvaluation.hasEvaluated);
+const AddEvaluation = ({ formOptions }) => {
+  const [evaluation, setEvaluation] = useState(formOptions.evaluation);
+  const [comment, setComment] = useState(formOptions.comment);
+  const [evaluated, setEvaluated] = useState(formOptions.evaluated);
 
-  function handleErase() {
-    setEvaluation('');
-    setComment('');
-  }
+  const handleErase = () => setComment('');
+  let title = evaluated ? 'Tu evaluación' : 'Agregar comentario';
 
-  async function handleSubmit(comment) {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ evaluation: evaluation, comment: comment }),
-    };
-    const response = await fetch(endpoints('resourceEvaluation', myEvaluation.resourceId), requestOptions);
-    await response.json();
-    myEvaluation.updateEvaluations();
-    myEvaluation.updateAverage();
+  const handleSubmit = () => {
+    formOptions.handleSubmitForm(evaluation, comment);
     setEvaluated(true);
-  }
-
-  if (evaluated) return <></>;
+  };
 
   return (
-    <Card title="Agregar comentario">
-      <Rating value={evaluation} onChange={(e) => setEvaluation(e.value)} cancel={false} />
-      <InputTextarea rows={5} cols={100} value={comment} onChange={(e) => setComment(e.target.value)} autoResize maxlength="800" />
+    <Card title={title}>
+      <Rating value={evaluation} onChange={(e) => setEvaluation(e.value)} cancel={false} readOnly={evaluated} className={styles.inputRating} />
+      <InputTextarea rows={4} cols={80} value={comment} onChange={(e) => setComment(e.target.value)} disabled={evaluated} autoResize maxlength="800" />
       <div className="dialog-demo">
-        <Button type="button" label="Borrar" icon="pi pi-times" className="p-button-text" onClick={() => handleErase()} />
-        <Button type="submit" label="Guardar evaluación" icon="pi pi-check" onClick={() => handleSubmit(comment)} />
+        <Button type="button" label="Borrar" icon="pi pi-times" className="p-button-text" onClick={() => handleErase()} disabled={evaluated} />
+        <Button type="submit" label="Guardar evaluación" icon="pi pi-check" onClick={handleSubmit} disabled={evaluated} />
       </div>
+      <Toast ref={formOptions.toast} position="bottom-center" />
     </Card>
   );
 };
