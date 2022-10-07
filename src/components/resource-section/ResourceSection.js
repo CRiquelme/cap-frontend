@@ -16,8 +16,6 @@ const ResourceSection = ({ resourceId }) => {
 
   if (isErrorResource || isErrorAverage || isErrorEvaluations || isErrorEvaluation) return 'error';
 
-  const hasEvaluated = data.evaluation ? true : false; // revisar
-
   const resource = {
     name: resourceData.name,
     url: resourceData.url,
@@ -28,7 +26,8 @@ const ResourceSection = ({ resourceId }) => {
     resourceId: resourceData.id,
     updateAverage: updateAverage,
     updateEvaluations: updateEvaluations,
-    hasEvaluated: hasEvaluated,
+    evaluation: data.evaluation,
+    comment: data.comment,
   };
 
   return (
