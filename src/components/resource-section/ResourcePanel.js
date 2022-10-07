@@ -5,7 +5,7 @@ import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
 import LinkButton from './LinkButton';
 import styles from '@styles/ResourceEvaluations.module.scss';
-import AddEvaluation from 'components/resource-panel/AddEvaluation';
+import AddEvaluation from '@components/resource-section/AddEvaluation';
 
 const ResourcePanel = ({ resource, myEvaluation }) => {
   const router = useRouter();
