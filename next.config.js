@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ['fintualist.com', 'images.unsplash.com'],
+  },
   async rewrites() {
     return [
       {
