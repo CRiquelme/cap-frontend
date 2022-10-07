@@ -8,11 +8,7 @@ function CurriculumPage() {
 
   if (!isReady) return <Skeleton shape="rectangle" width="100%" height="100%" />;
 
-  return (
-    <>
-      <LearningUnitsSection curriculumId={curriculumId} />
-    </>
-  );
+  return <LearningUnitsSection curriculumId={curriculumId} />;
 }
 
 export default CurriculumPage;
