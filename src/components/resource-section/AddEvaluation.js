@@ -14,11 +14,10 @@ const AddEvaluation = ({ formOptions }) => {
   const handleErase = () => setComment('');
   let title = evaluated ? 'Tu evaluación' : 'Agregar comentario';
 
-
   const handleSubmit = () => {
     formOptions.handleSubmitForm(evaluation, comment);
     setEvaluated(true);
-  }
+  };
 
   return (
     <Card title={title}>

@@ -41,9 +41,9 @@ const ResourceSection = ({ resourceId }) => {
   };
 
   const formOptions = {
-    evaluation: data.evaluation? data.evaluation : 1,
+    evaluation: data.evaluation ? data.evaluation : 1,
     comment: data.comment,
-    evaluated: data.evaluation? true : false,
+    evaluated: data.evaluation ? true : false,
     handleSubmitForm: handleSubmitForm,
     toast: toast,
   };
