@@ -21,7 +21,10 @@ const ResourcesListItem = ({ resource }) => {
               <Average average={parseFloat(resource.average_evaluation).toFixed(1)} />
             </div>
             <div className={styles.resourceUrl}>
-              <i className="pi pi-link"></i> <Link href={resource.url}>Enlace del recurso</Link>
+              <i className="pi pi-link"></i>{' '}
+              <a href={resource.url} target="_blank" rel="noreferrer">
+                Enlace del recurso
+              </a>
             </div>
             <div className={styles.resourceLink}>
               <Link href={`/resources/${resource.id}`}>
