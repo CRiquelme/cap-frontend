@@ -8,8 +8,8 @@ import styles from '@styles/LearningUnitsList.module.scss';
 const LearningUnitsList = ({ learningUnits }) => {
   const toast = useRef(null);
   const showSuccess = () => {
-    toast.current.show({severity:'success', summary: 'Learning unit actualizado', life: 2000});
-  }
+    toast.current.show({ severity: 'success', summary: 'Learning unit actualizado', life: 2000 });
+  };
 
   const renderListItem = (unit) => {
     return <LearningUnitListItem unit={unit} showSuccess={showSuccess} />;

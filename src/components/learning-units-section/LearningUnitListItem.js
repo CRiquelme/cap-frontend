@@ -14,7 +14,6 @@ function LearningUnitItem({ unit, showSuccess }) {
   const { data: isCompleted, isLoading, isError, mutate } = useGet(completedLearningUnitEndpoint);
 
   const changeHandler = (clicked) => {
-
     const requestOptions = {
       method: clicked.value ? 'POST' : 'DELETE',
       headers: { 'Content-Type': 'application/json' },
@@ -26,7 +25,6 @@ function LearningUnitItem({ unit, showSuccess }) {
       }
     });
   };
-
 
   if (isLoading) {
     return <Skeleton shape="rectangle" width="50%" />;
