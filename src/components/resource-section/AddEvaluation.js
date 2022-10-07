@@ -6,12 +6,16 @@ import { Button } from 'primereact/button';
 import { endpoints } from 'utils/endpoints';
 
 const AddEvaluation = ({ myEvaluation }) => {
-  const [evaluation, setEvaluation] = useState(undefined);
-  const [comment, setComment] = useState('');
-  const [evaluated, setEvaluated] = useState(myEvaluation.hasEvaluated);
+  const defaultOptions = {
+    evaluation: myEvaluation.evaluation? myEvaluation.evaluation : 1,
+    evaluated: myEvaluation.evaluation? true : false,
+  }
+
+  const [evaluation, setEvaluation] = useState(defaultOptions.evaluation);
+  const [comment, setComment] = useState(myEvaluation.comment);
+  const [evaluated, setEvaluated] = useState(defaultOptions.evaluated);
 
   function handleErase() {
-    setEvaluation('');
     setComment('');
   }
 
@@ -28,15 +32,15 @@ const AddEvaluation = ({ myEvaluation }) => {
     setEvaluated(true);
   }
 
-  if (evaluated) return <></>;
+  let title = evaluated ? "Tu evaluación" : "Agregar comentario";
 
   return (
-    <Card title="Agregar comentario">
-      <Rating value={evaluation} onChange={(e) => setEvaluation(e.value)} cancel={false} />
-      <InputTextarea rows={5} cols={100} value={comment} onChange={(e) => setComment(e.target.value)} autoResize maxlength="800" />
+    <Card title={title}>
+      <Rating value={evaluation} onChange={(e) => setEvaluation(e.value)} cancel={false} readOnly={evaluated} />
+      <InputTextarea rows={5} cols={100} value={comment} onChange={(e) => setComment(e.target.value)} disabled={evaluated} autoResize maxlength="800" />
       <div className="dialog-demo">
-        <Button type="button" label="Borrar" icon="pi pi-times" className="p-button-text" onClick={() => handleErase()} />
-        <Button type="submit" label="Guardar evaluación" icon="pi pi-check" onClick={() => handleSubmit(comment)} />
+        <Button type="button" label="Borrar" icon="pi pi-times" className="p-button-text" onClick={() => handleErase()} disabled={evaluated} />
+        <Button type="submit" label="Guardar evaluación" icon="pi pi-check" onClick={() => handleSubmit(comment)} disabled={evaluated} />
       </div>
     </Card>
   );
