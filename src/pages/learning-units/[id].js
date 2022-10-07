@@ -1,13 +1,13 @@
-import React from 'react';
-import ResourcesList from '@components/resources-list/ResourcesList';
 import { useRouter } from 'next/router';
-import '@styles/ResourcesList.module.scss';
+import ResourcesSection from '@components/resources-section/ResourcesSection';
 
 const LearningUnitPage = () => {
-  const router = useRouter();
-  let learningUnitId = router.query.id;
+  const { query, isReady } = useRouter();
+  const learningUnitId = query.id;
 
-  return <ResourcesList learningUnitId={learningUnitId} />;
+  if (!isReady) return 'loading';
+
+  return <ResourcesSection learningUnitId={learningUnitId} />;
 };
 
 export default LearningUnitPage;
